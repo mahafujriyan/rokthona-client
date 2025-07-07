@@ -3,11 +3,19 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router";
+import MainLayouts from '../Layouts/MainLayouts/MainLayouts';
+import Home from '../pages/Home/Home';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello World</div>,
+    element: <MainLayouts></MainLayouts>,
+    children:[
+        {
+            index:true,
+            element:<Home></Home>
+        }
+    ]
   },
 ]);
 
