@@ -1,10 +1,19 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../Context/AuthContex';
+import axios from 'axios';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router';
+import { updateProfile } from 'firebase/auth';
 
 const Register = () => {
   const [districts, setDistricts] = useState([]);
   const [upazilas, setUpazilas] = useState([]);
   const [filteredUpazilas, setFilteredUpazilas] = useState([]);
+const {createUser}=useContext(AuthContext)
+const [showPassword, setShowPassword] = useState(false);
+const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -16,6 +25,7 @@ const Register = () => {
     password: '',
     confirmPassword: '',
   });
+const navigate=useNavigate()
 
   // Load districts
   useEffect(() => {
@@ -44,45 +54,88 @@ const Register = () => {
   }
 }, [formData.district, upazilas]);
 
-   console.log(setFilteredUpazilas)
+  
   // Handle input change
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   // Handle avatar upload to imageBB
-  const handleImageUpload = async e => {
-    const image = e.target.files[0];
-    const form = new FormData();
-    form.append('image', image);
+const handleImageUpload = async (e) => {
+  const image = e.target.files[0];
+  const form = new FormData();
+  form.append('image', image);
 
-    const res = await fetch(`https://api.imgbb.com/1/upload?key=YOUR_IMAGEBB_API_KEY`, {
-      method: 'POST',
-      body: form,
-    });
+  try {
+    const res = await axios.post(
+      `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_upload_key}`,
+      form
+    );
 
-    const data = await res.json();
+    const data = res.data;
     if (data.success) {
-      setFormData(prev => ({ ...prev, avatar: data.data.url }));
+      setFormData(prev => ({ ...prev, avatar: data.data.display_url }));
+    } else {
+      alert("Failed to upload image");
     }
-  };
+  } catch (err) {
+    console.error("Image upload failed", err);
+  }
+};
 
-  const handleSubmit = e => {
-    e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      return alert("Passwords do not match");
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const { password, confirmPassword, name, avatar, email } = formData;
+
+  if (password !== confirmPassword) {
+    return alert("Passwords do not match");
+  }
+
+  const minLength = /.{6,}/;
+  const hasUppercase = /[A-Z]/;
+  const hasLowercase = /[a-z]/;
+  const hasNumber = /[0-9]/;
+
+  if (
+    !minLength.test(password) ||
+    !hasUppercase.test(password) ||
+    !hasLowercase.test(password) ||
+    !hasNumber.test(password)
+  ) {
+    return toast.error('Password must be 6+ characters, include uppercase, lowercase and number.');
+  }
+
+  try {
+    const res = await createUser(email, password);
+
+    // ✅ Ensure avatar is available
+    if (avatar) {
+      await updateProfile(res.user, {
+        displayName: name,
+        photoURL: avatar,
+      });
     }
 
-    const user = {
+    const newUser = {
       ...formData,
-      role: 'donor',
-      status: 'active',
+      role: "donor",
+      status: "active",
     };
 
-    console.log('Submitting user:', user);
-    // 🔒 Submit user to backend here
-  };
+    toast.success('Registration successful!');
+    navigate('/');
+    console.log("User registered successfully:", newUser);
+
+  } catch (error) {
+    console.error("Error creating user:", error);
+    toast.error(error.message || 'Registration failed.');
+  }
+};
+
+  
 
   return (
     <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-lg space-y-4">
@@ -133,13 +186,55 @@ const Register = () => {
           <option key={u.id} value={u.name}>{u.name}</option>
         ))}
         </select>
+{/* Password */}
+<label className="form-control">
+  <span className="label-text">Password</span>
+  <div className="relative">
+    <input
+      type={showPassword ? 'text' : 'password'}
+      name="password"
+      value={formData.password}
+      onChange={handleChange}
+      className="input input-bordered w-full pr-10"
+      required
+    />
+    <button
+      type="button"
+      onClick={() => setShowPassword(!showPassword)}
+      className="absolute top-3 right-3 text-xl"
+    >
+      {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+    </button>
+  </div>
+</label>
+
+{/* Confirm Password */}
+<label className="form-control">
+  <span className="label-text">Confirm Password</span>
+  <div className="relative">
+    <input
+      type={showConfirmPassword ? 'text' : 'password'}
+      name="confirmPassword"
+      value={formData.confirmPassword}
+      onChange={handleChange}
+      className="input input-bordered w-full pr-10"
+      required
+    />
+    <button
+      type="button"
+      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+      className="absolute top-3 right-3 text-xl"
+    >
+      {showConfirmPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+    </button>
+  </div>
+</label>
 
 
-        <input type="password" name="password" placeholder="Password" required className="input input-bordered w-full" onChange={handleChange} />
-        <input type="password" name="confirmPassword" placeholder="Confirm Password" required className="input input-bordered w-full" onChange={handleChange} />
-
+       
         <button type="submit" className="btn btn-primary w-full">Register</button>
       </form>
+        <p>Do you already have an account? Please <Link  to='/logIn'><span className='text-red-400'>LogIn</span></Link> </p>
     </div>
   );
 };

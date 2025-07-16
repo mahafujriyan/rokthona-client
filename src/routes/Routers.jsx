@@ -6,6 +6,7 @@ import {
 import MainLayouts from '../Layouts/MainLayouts/MainLayouts';
 import Home from '../pages/Home/Home';
 import Register from '../Components/Registration/Register';
+import LogIn from '../Components/Registration/LogIn';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
         {
           path:'singUp',
           element:<Register></Register>
+        },
+        {
+          path:'logIn',
+          element:<LogIn></LogIn>
         }
     ]
   },

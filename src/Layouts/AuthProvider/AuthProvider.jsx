@@ -61,11 +61,11 @@ const AuthProvider = ({children}) => {
     }
 
     useEffect(()=>{
-    const unsubscribe=onAuthStateChanged(auth,currenUser=>{
+    const unsubscribe=onAuthStateChanged(auth,async currenUser=>{
       setUser(currenUser)
        setLoading(false);
        if(currenUser){
-          const token=currenUser.getIdToken()
+          const token=await currenUser.getIdToken()
             localStorage.setItem('access-token',token)
        }
        else{

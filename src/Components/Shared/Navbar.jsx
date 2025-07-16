@@ -6,7 +6,8 @@ import Logo from '../Logo';
 
 
 const Navbar = () => {
-     const { user, logout } = useContext(AuthContext);
+  const { user, signOutUser } = useContext(AuthContext);
+
 
   const navLinks = (
     <>
@@ -31,25 +32,39 @@ const Navbar = () => {
 
       {/* User Info or Login */}
       <div className="navbar-end ">
-        {user ? (
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-8 rounded-full">
-                {user.photoURL ? (
-                  <img src={user.photoURL} alt="user" />
-                ) : (
-                  <FaUserCircle className="w-8 h-8 text-gray-500" />
-                )}
-              </div>
-            </label>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-              <li><Link to="/dashboard">Dashboard</Link></li>
-              <li><button onClick={logout}>Logout</button></li>
-            </ul>
-          </div>
+       {user ? (
+  <div className="dropdown dropdown-end">
+    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+      <div className="w-8 rounded-full">
+        {user.photoURL ? (
+          <img src={user.photoURL} alt="user avatar" />
         ) : (
-          <Link to="/singUp" className="btn btn-outline btn-sm">Login</Link>
+          <FaUserCircle className="w-8 h-8 text-gray-500" />
         )}
+      </div>
+    </label>
+    <ul
+      tabIndex={0}
+      className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+    >
+      <li className="font-semibold text-center border-b pb-2">
+        {user.displayName || 'Anonymous User'}
+      </li>
+      <li>
+        <Link to="/dashboard">Dashboard</Link>
+      </li>
+      <li>
+        <button onClick={signOutUser}>Logout</button>
+      </li>
+    </ul>
+  </div>
+) : (
+  <Link to="/logIn" className="btn btn-outline btn-sm">
+    Login
+  </Link>
+)}
+
+
       </div>
       {/* Mobile Menu */}
 <div className="dropdown dropdown-end lg:hidden">
