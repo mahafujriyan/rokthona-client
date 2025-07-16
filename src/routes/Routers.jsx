@@ -5,6 +5,7 @@ import {
 } from "react-router";
 import MainLayouts from '../Layouts/MainLayouts/MainLayouts';
 import Home from '../pages/Home/Home';
+import Register from '../Components/Registration/Register';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
         {
             index:true,
             element:<Home></Home>
+        },
+        {
+          path:'singUp',
+          element:<Register></Register>
         }
     ]
   },
