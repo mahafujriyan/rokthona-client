@@ -18,7 +18,7 @@ const Navbar = () => {
   );
 
     return (
-       <div className="navbar bg-[#f5bdbd] shadow-md sticky top-0 z-50 rounded-xl">
+       <div className=" navbar bg-[#f5bdbd] shadow-md sticky top-0 z-50 rounded-xl">
       <div className="navbar-start">
       <Logo></Logo>
       </div>
