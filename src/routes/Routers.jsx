@@ -7,6 +7,7 @@ import MainLayouts from '../Layouts/MainLayouts/MainLayouts';
 import Home from '../pages/Home/Home';
 import Register from '../Components/Registration/Register';
 import LogIn from '../Components/Registration/LogIn';
+import CommentPost from '../pages/Home/Contactus/CommentPost';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
         {
           path:'logIn',
           element:<LogIn></LogIn>
+        },
+        {
+          path:'comments',
+          element:<CommentPost></CommentPost>
         }
     ]
   },
