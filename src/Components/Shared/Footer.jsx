@@ -35,15 +35,15 @@ const Footer = () => {
           <ul className="space-y-4 text-gray-400">
             <li className="flex items-center gap-2">
               <FaPhoneAlt className="text-red-600" />
-              +98 765 43210
+              +880 1889359904
             </li>
             <li className="flex items-center gap-2">
               <FaEnvelope className="text-red-600" />
-              Donors@support.com
+              rokthona@gmail.com
             </li>
             <li className="flex items-start gap-2">
               <FaMapMarkerAlt className="text-red-600 mt-1" />
-              130 Anywhere St, Tomsk, Russia 238795
+              Khulna, Dhaka ,Bangladesh
             </li>
           </ul>
         </div>
