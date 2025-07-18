@@ -8,6 +8,7 @@ import {
   FaMapMarkerAlt,
 } from 'react-icons/fa';
 import Logo from '../Logo';
+import { Link } from 'react-router';
 
 const Footer = () => {
   return (
@@ -21,9 +22,9 @@ const Footer = () => {
         <div>
           <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2 text-gray-400">
-            <li className="hover:text-white cursor-pointer">About Us</li>
+            <Link to='about' className="hover:text-white cursor-pointer">About Us</Link>
             <li className="hover:text-white cursor-pointer">Events</li>
-            <li className="hover:text-white cursor-pointer">Contact Us</li>
+            <Link to='/contact' className="hover:text-white cursor-pointer">Contact Us</Link>
             <li className="hover:text-white cursor-pointer">Volunteers</li>
             <li className="hover:text-white cursor-pointer">FAQs</li>
           </ul>

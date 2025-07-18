@@ -8,6 +8,9 @@ import Home from '../pages/Home/Home';
 import Register from '../Components/Registration/Register';
 import LogIn from '../Components/Registration/LogIn';
 import CommentPost from '../pages/Home/Contactus/CommentPost';
+import AboutUs from '../pages/About/AboutUs';
+import ContactUs from '../pages/Home/Contactus/ContactUs';
+import DashboardLayout from '../Layouts/DashboardLayout/DashboardLayout';
 
 const router = createBrowserRouter([
   {
@@ -29,9 +32,21 @@ const router = createBrowserRouter([
         {
           path:'comments',
           element:<CommentPost></CommentPost>
+        },
+        {
+          path:'about',
+          element:<AboutUs></AboutUs>
+        },
+        {
+          path:'contact',
+          element:<ContactUs></ContactUs>
         }
     ]
   },
+  {
+    path:'/dashboard',
+    element:<DashboardLayout></DashboardLayout>
+  }
 ]);
 
 
