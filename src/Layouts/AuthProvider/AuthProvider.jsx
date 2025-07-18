@@ -67,6 +67,8 @@ const AuthProvider = ({children}) => {
        if(currenUser){
           const token=await currenUser.getIdToken()
             localStorage.setItem('access-token',token)
+               console.log('user in the auth state change', currenUser);
+
        }
        else{
         localStorage.removeItem('access-token')
@@ -93,6 +95,7 @@ const AuthProvider = ({children}) => {
 
         
     }
+ 
     return (
       <AuthContext.Provider value={authInfo}>
         {children}

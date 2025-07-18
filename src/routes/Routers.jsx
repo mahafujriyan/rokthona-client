@@ -11,6 +11,7 @@ import CommentPost from '../pages/Home/Contactus/CommentPost';
 import AboutUs from '../pages/About/AboutUs';
 import ContactUs from '../pages/Home/Contactus/ContactUs';
 import DashboardLayout from '../Layouts/DashboardLayout/DashboardLayout';
+import Profile from '../pages/Dashboard/Profile';
 
 const router = createBrowserRouter([
   {
@@ -45,7 +46,13 @@ const router = createBrowserRouter([
   },
   {
     path:'/dashboard',
-    element:<DashboardLayout></DashboardLayout>
+    element:<DashboardLayout></DashboardLayout>,
+    children:[
+      {
+        path:"profile",
+        element:<Profile></Profile>
+      }
+    ]
   }
 ]);
 

@@ -12,7 +12,7 @@ import { Link } from 'react-router';
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-10 px-6 md:px-16">
+    <footer className=" bg-[#f5bdbd] text-white py-10 px-6 md:px-16">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
         {/* Logo & Description */}
         <Logo></Logo>
@@ -21,7 +21,7 @@ const Footer = () => {
         {/* Quick Links */}
         <div>
           <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
-          <ul className="space-y-2 text-gray-400">
+          <ul className="space-y-2 text-black">
             <Link to='about' className="hover:text-white cursor-pointer">About Us</Link>
             <li className="hover:text-white cursor-pointer">Events</li>
             <Link to='/contact' className="hover:text-white cursor-pointer">Contact Us</Link>
@@ -33,7 +33,7 @@ const Footer = () => {
         {/* Contact Info */}
         <div>
           <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
-          <ul className="space-y-4 text-gray-400">
+          <ul className="space-y-4 text-black">
             <li className="flex items-center gap-2">
               <FaPhoneAlt className="text-red-600" />
               +880 1889359904
@@ -52,7 +52,7 @@ const Footer = () => {
         {/* Newsletter */}
         <div>
           <h3 className="text-xl font-semibold mb-4">Newsletter</h3>
-          <p className="text-gray-400 mb-4">
+          <p className="text-black mb-4">
             Subscribe to Our Newsletter to receive the newest updates and info.
           </p>
           <div className="flex items-center">
@@ -76,7 +76,7 @@ const Footer = () => {
           <a href="#"><FaTwitter /></a>
           <a href="#"><FaYoutube /></a>
         </div>
-        <p className="text-center">
+        <p className="text-center text-black">
           Copyright © 2025 Donors, All rights reserved. Present by
           <span className="text-white"> CreedCreatives</span>
         </p>

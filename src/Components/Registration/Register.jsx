@@ -6,6 +6,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router';
 import { updateProfile } from 'firebase/auth';
+import useAxios from '../../Utilities/Axios/UseAxios';
 
 const Register = () => {
   const [districts, setDistricts] = useState([]);
@@ -26,20 +27,21 @@ const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     confirmPassword: '',
   });
 const navigate=useNavigate()
-
+const axios =useAxios()
   // Load districts
+ 
   useEffect(() => {
-    fetch('/district.json')
-      .then(res => res.json())
-      .then(data => setDistricts(data));
-  }, []);
+    axios.get('/api/districts')
+      .then(res => setDistricts(res.data))
+      .catch(err => console.error(err));
+  }, [axios]);
 
   // Load all upazilas once
-  useEffect(() => {
-    fetch('/upzila.json')
-      .then(res => res.json())
-      .then(data => setUpazilas(data));
-  }, []);
+useEffect(() => {
+    axios.get('/api/upazilas')
+      .then(res => setUpazilas(res.data))
+      .catch(err => console.error(err));
+  }, [axios]);
 
  
 
@@ -119,14 +121,25 @@ const handleSubmit = async (e) => {
       });
     }
 
-    const newUser = {
-      ...formData,
-      role: "donor",
-      status: "active",
-    };
+   const newUser = {
+    name,
+    email,
+    avatar,
+    bloodGroup: formData.bloodGroup,
+    district: formData.district,
+    upazila: formData.upazila,
+    role: "donor",
+    status: "active",
+  };
+    await axios.post('/users', newUser);
 
-    toast.success('Registration successful!');
-    navigate('/');
+    
+         toast.success('Registration successful!');
+        navigate('/');
+        setTimeout(() => {
+          window.location.reload();
+        }, 100); // Small delay to allow navigation
+
     console.log("User registered successfully:", newUser);
 
   } catch (error) {
@@ -138,7 +151,7 @@ const handleSubmit = async (e) => {
   
 
   return (
-    <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-lg space-y-4">
+    <div className="max-w-xl my-5 mx-auto bg-white p-6 rounded-xl shadow-lg space-y-4">
       <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input type="email" name="email" placeholder="Email" required className="input input-bordered w-full" onChange={handleChange} />

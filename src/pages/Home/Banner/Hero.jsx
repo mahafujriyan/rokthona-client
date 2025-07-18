@@ -27,7 +27,7 @@ const Hero = () => {
           <p className="mt-4 text-lg font-medium text-gray-700">BE A LIFESAVER</p>
            <FaTint className="text-red-500 animate-bounce w-10 h-auto" />
          <div className='flex gap-2'>
-           <Link to='/singUp' className="btn mt-6 px-6 py-3 bg-red-300 text-red-500 font-bold rounded-full shadow hover:bg-red-700 transition duration-200 hover:text-white">
+           <Link to='/singUp' className="btn mt-6 px-6 py-3 bg-red-300 text-white font-bold rounded-full shadow hover:bg-red-700 transition duration-200 hover:text-white">
             Join as a donor
           </Link>
            <Link className="btn mt-6 px-6 py-3 bg-red-600 text-white font-bold rounded-full shadow hover:bg-red-700 transition duration-200">
