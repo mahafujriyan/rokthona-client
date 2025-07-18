@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const useAxios = () => {
   const instance = axios.create({
-    baseURL: 'http://localhost:5000', // or your API endpoint
+    baseURL: import.meta.env.VITE_API_URL,
   });
 
   instance.interceptors.request.use(config => {
