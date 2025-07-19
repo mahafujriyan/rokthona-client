@@ -132,7 +132,8 @@ const router = createBrowserRouter([
     {
       path:"content-management-addBlog",
       element:<AddBlog></AddBlog>
-    }
+    },
+   
 
 
     ]

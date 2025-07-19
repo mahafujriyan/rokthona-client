@@ -11,8 +11,12 @@ const ContentManagement = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [userRole, setUserRole] = useState('donor');
 
-  const userRole = localStorage.getItem('user-role') || 'donor';
+  useEffect(() => {
+    const role = localStorage.getItem('user-role');
+    if (role) setUserRole(role);
+  }, []);
 
   const fetchBlogs = async () => {
     setLoading(true);
@@ -33,8 +37,6 @@ const ContentManagement = () => {
   useEffect(() => {
     fetchBlogs();
   }, [filterStatus, page]);
-
- 
 
   const handlePublishToggle = async (blog) => {
     if (userRole !== 'admin') return alert('Only admins can change status.');
@@ -102,8 +104,8 @@ const ContentManagement = () => {
               <div className="card-body flex flex-col">
                 <h3 className="card-title">{blog.title}</h3>
                 <p className="text-sm text-gray-600 line-clamp-3" dangerouslySetInnerHTML={{ __html: blog.content }}></p>
-                
-                <div className="mt-auto pt-4 flex items-center justify-between">
+
+                <div className="mt-auto pt-4 flex flex-col gap-2">
                   <span
                     className={`badge px-3 ${
                       blog.status === 'published' ? 'badge-success' : 'badge-warning'
@@ -112,21 +114,41 @@ const ContentManagement = () => {
                     {blog.status}
                   </span>
 
-                  {userRole === 'admin' && (
-                    <div className="space-x-1">
-                      <button
-                        onClick={() => handlePublishToggle(blog)}
-                        className="btn btn-sm btn-info"
+                  <div className="flex flex-wrap gap-2">
+                    {/* Edit button available to both admin and volunteer */}
+                    {(userRole === 'admin' || userRole === 'volunteer') && (
+                      <Link
+                        to={`/dashboard/edit-blog/${blog._id}`}
+                        className="btn btn-sm btn-secondary"
                       >
-                        {blog.status === 'draft' ? 'Publish' : 'Unpublish'}
-                      </button>
-                      <button
-                        onClick={() => handleDelete(blog._id)}
-                        className="btn btn-sm btn-error"
-                      >
-                        Delete
-                      </button>
-                    </div>
+                        Edit
+                      </Link>
+                    )}
+
+                    {/* Admin-only buttons */}
+                    {userRole === 'admin' && (
+                      <>
+                        <button
+                          onClick={() => handlePublishToggle(blog)}
+                          className="btn btn-sm btn-info"
+                        >
+                          {blog.status === 'draft' ? 'Publish' : 'Unpublish'}
+                        </button>
+                        <button
+                          onClick={() => handleDelete(blog._id)}
+                          className="btn btn-sm btn-error"
+                        >
+                          Delete
+                        </button>
+                      </>
+                    )}
+                  </div>
+
+                  {/* Message for volunteers */}
+                  {userRole === 'volunteer' && (
+                    <p className="text-xs text-gray-400">
+                      Only admins can publish or delete blogs.
+                    </p>
                   )}
                 </div>
               </div>
