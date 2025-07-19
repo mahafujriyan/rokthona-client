@@ -25,6 +25,8 @@ import AllUsers from '../pages/DashboardData/Admin/AllUsers';
 import AllRequest from '../pages/DashboardData/Admin/AllRequest';
 import ContentMangment from '../pages/DashboardData/Admin/ContentMangment';
 import AddBlog from '../pages/DashboardData/Admin/AddBlog';
+import PrivateRoute from './PrivateRoute';
+import DonationPublic from '../pages/DonationRequestPublic/DonationPublic';
 
 const router = createBrowserRouter([
   {
@@ -44,6 +46,11 @@ const router = createBrowserRouter([
           element:<LogIn></LogIn>
         },
         {
+          path:'public-donation',
+          element:<DonationPublic></DonationPublic>
+
+        },
+        {
           path:'comments',
           element:<CommentPost></CommentPost>
         },
@@ -54,6 +61,13 @@ const router = createBrowserRouter([
         {
           path:'contact',
           element:<ContactUs></ContactUs>
+        },
+        {
+          path:'/donation-request/:id',
+          element:<PrivateRoute>
+            <ViewRequest></ViewRequest>
+          </PrivateRoute>
+
         }
     ]
   },
