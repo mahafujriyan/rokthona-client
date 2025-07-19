@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router';
 
 const CreateDonation = () => {
     const { user } = useContext(AuthContext);
+    console.log(user)
   const axiosSecure = useAxios();
   const navigate = useNavigate();
 
@@ -72,8 +73,9 @@ const CreateDonation = () => {
          <div className="p-4 max-w-3xl mx-auto">
       <h2 className="text-2xl font-bold mb-6 text-center">🆕 Create Donation Request</h2>
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <input type="text" value={user.displayName} readOnly className="input input-bordered w-full" />
-        <input type="email" value={user.email} readOnly className="input input-bordered w-full" />
+       <input type="text" value={user?.displayName || ''} readOnly className="input input-bordered w-full" />
+<input type="email" value={user?.email || ''} readOnly className="input input-bordered w-full" />
+
 
         <input
           type="text"

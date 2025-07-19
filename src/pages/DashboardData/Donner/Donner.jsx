@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../../../Context/AuthContex';
 import axios from 'axios';
 import Loader from '../../../Utilities/Loader';
@@ -17,7 +17,7 @@ const Donner = () => {
     const fetchRequests = async () => {
       try {
         const token = localStorage.getItem('access-token');
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/donation-requests`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/donation-requests/by-requester`, {
           params: { email: user?.email, limit: 3 },
           headers: { Authorization: `Bearer ${token}` },
         });

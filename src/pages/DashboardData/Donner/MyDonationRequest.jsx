@@ -14,7 +14,7 @@ const MyDonationRequest = () => {
   const fetchRequests = async () => {
     try {
       const token = localStorage.getItem('access-token');
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/donation-requests`, {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/donation-requests/by-requester`, {
         headers: { Authorization: `Bearer ${token}` },
         params: {
           email: user?.email,
