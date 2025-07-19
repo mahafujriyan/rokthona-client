@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import useAxios from '../../../Utilities/Axios/UseAxios';
 
 const ContentManagement = () => {
@@ -34,7 +34,7 @@ const ContentManagement = () => {
     fetchBlogs();
   }, [filterStatus, page]);
 
-  const handleAddBlog = () => navigate('/dashboard/content-management/add-blog');
+ 
 
   const handlePublishToggle = async (blog) => {
     if (userRole !== 'admin') return alert('Only admins can change status.');
@@ -64,9 +64,9 @@ const ContentManagement = () => {
     <div className="max-w-7xl mx-auto px-4 py-6">
       <div className="flex flex-col sm:flex-row justify-between gap-4 items-center mb-6">
         <h2 className="text-xl font-semibold">📝 Content Management</h2>
-        <button onClick={handleAddBlog} className="btn btn-primary btn-sm w-full sm:w-auto">
+        <Link to='/dashboard/content-management-addBlog' className="btn btn-primary btn-sm w-full sm:w-auto">
           ➕ Add Blog
-        </button>
+        </Link>
       </div>
 
       <div className="mb-4">
