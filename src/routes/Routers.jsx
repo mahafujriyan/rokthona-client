@@ -22,6 +22,9 @@ import EditRequest from '../pages/DashboardData/Donner/EditRequest';
 import ViewRequest from '../pages/DashboardData/Donner/ViewRequest';
 import Admin from '../pages/DashboardData/Admin/Admin';
 import AllUsers from '../pages/DashboardData/Admin/AllUsers';
+import AllRequest from '../pages/DashboardData/Admin/AllRequest';
+import ContentMangment from '../pages/DashboardData/Admin/ContentMangment';
+import AddBlog from '../pages/DashboardData/Admin/AddBlog';
 
 const router = createBrowserRouter([
   {
@@ -104,6 +107,13 @@ const router = createBrowserRouter([
       )
 
     },
+    {
+      path:"all-donation-request",
+      element:<AdminRoute>
+        <AllRequest></AllRequest>
+      </AdminRoute>
+
+    },
       {
       path: "role-management",
       element: (
@@ -111,7 +121,19 @@ const router = createBrowserRouter([
           <RoleManagement />
         </AdminRoute>
       ),
+    },
+    {
+      path:"content-management",
+      element:<ContentMangment>
+
+      </ContentMangment>
+
+    },
+    {
+      path:"content-management-addBlog",
+      element:<AddBlog></AddBlog>
     }
+
 
     ]
   }

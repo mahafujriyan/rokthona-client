@@ -1,5 +1,13 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../../../Context/AuthContex';
+import useAxios from '../../../Utilities/Axios/UseAxios';
+import { format } from 'date-fns';
+
+const formatted = format(new Date(), 'PPPp');
+console.log(formatted); 
+
 const statusOptions = ['all', 'pending', 'inprogress', 'done', 'canceled'];
 const AllRequest = () => {
     const [requests, setRequests] = useState([]);
@@ -8,7 +16,7 @@ const AllRequest = () => {
   const [totalPages, setTotalPages] = useState(1);
 
   const { user } = useContext(AuthContext);
-  const axiosSecure = useAxiosSecure();
+  const axiosSecure = useAxios();
 
   useEffect(() => {
     const fetchRequests = async () => {
