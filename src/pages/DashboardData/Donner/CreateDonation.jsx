@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 
 const CreateDonation = () => {
     const { user } = useContext(AuthContext);
-    console.log(user)
+ 
   const axiosSecure = useAxios();
   const navigate = useNavigate();
 

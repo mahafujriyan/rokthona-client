@@ -18,6 +18,10 @@ import Unauthorized from '../Utilities/Unauthorized';
 import Donner from '../pages/DashboardData/Donner/Donner';
 import MyDonationRequest from '../pages/DashboardData/Donner/MyDonationRequest';
 import CreateDonation from '../pages/DashboardData/Donner/CreateDonation';
+import EditRequest from '../pages/DashboardData/Donner/EditRequest';
+import ViewRequest from '../pages/DashboardData/Donner/ViewRequest';
+import Admin from '../pages/DashboardData/Admin/Admin';
+import AllUsers from '../pages/DashboardData/Admin/AllUsers';
 
 const router = createBrowserRouter([
   {
@@ -73,6 +77,33 @@ const router = createBrowserRouter([
         element:<CreateDonation></CreateDonation>
 
       },
+      
+    {
+      path: 'edit-request/:id',
+      element: <EditRequest />
+    },
+    {
+      path: 'requests/:id',
+      element: <ViewRequest/>
+    },
+    {
+      path:"admin-dashboard",
+      element:(
+        <AdminRoute>
+          <Admin></Admin>
+        </AdminRoute>
+      )
+
+    },
+    {
+      path:'all-users',
+      element:(
+        <AdminRoute>
+          <AllUsers></AllUsers>
+        </AdminRoute>
+      )
+
+    },
       {
       path: "role-management",
       element: (

@@ -62,27 +62,7 @@ const AuthProvider = ({children}) => {
 
     }
 
-    // useEffect(()=>{
-    // const unsubscribe=onAuthStateChanged(auth,async currenUser=>{
-    //   setUser(currenUser)
-    //    setLoading(false);
-    //    if(currenUser){
-    //       const token=await currenUser.getIdToken()
-    //         localStorage.setItem('access-token',token)
-    //            console.log('user in the auth state change', currenUser);
-
-    //    }
-    //    else{
-    //     localStorage.removeItem('access-token')
-    //    }
-           
-
-    //         console.log('user in the auth state change', currenUser)
-    //     })
-    // return ()=>{
-    //   unsubscribe()
-    // }
-    // },[])
+  
     useEffect(() => {
   const unsubscribe = onAuthStateChanged(auth, async (currenUser) => {
     if (currenUser) {
