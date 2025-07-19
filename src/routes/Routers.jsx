@@ -15,6 +15,9 @@ import Profile from '../pages/Dashboard/Profile';
 import RoleManagement from '../pages/Role/RoleManagement';
 import AdminRoute from './AdmminRoute';
 import Unauthorized from '../Utilities/Unauthorized';
+import Donner from '../pages/DashboardData/Donner/Donner';
+import MyDonationRequest from '../pages/DashboardData/Donner/MyDonationRequest';
+import CreateDonation from '../pages/DashboardData/Donner/CreateDonation';
 
 const router = createBrowserRouter([
   {
@@ -52,8 +55,23 @@ const router = createBrowserRouter([
     element:<DashboardLayout></DashboardLayout>,
     children:[
       {
+        index : true,
+        element:<Donner></Donner>
+
+      },
+      {
         path:"profile",
         element:<Profile></Profile>
+      },
+      {
+        path:'my-donation-requests',
+        element:<MyDonationRequest></MyDonationRequest>
+
+      },
+      {
+        path:'create-donation-request',
+        element:<CreateDonation></CreateDonation>
+
       },
       {
       path: "role-management",

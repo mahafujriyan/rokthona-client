@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 
 import {
   FaBars,
+  FaDonate,
   FaHeart,
   FaSignOutAlt,
   FaTachometerAlt,
@@ -51,7 +52,10 @@ const DashboardLayout = () => {
         <Link to="/dashboard/profile" className="flex items-center gap-2 hover:text-yellow-300">
           <FaUser /> Profile
         </Link>
-        <Link to="/dashboard/requests" className="flex items-center gap-2 hover:text-yellow-300">
+        <Link to="/dashboard/my-donation-requests" className="flex items-center gap-2 hover:text-yellow-300">
+          <FaDonate /> My Donation
+        </Link>
+        <Link to="/dashboard/create-donation-request" className="flex items-center gap-2 hover:text-yellow-300">
           <FaHeart /> Requests
         </Link>
         {user?.role === 'admin' && (
