@@ -17,7 +17,7 @@ const RoleManagement = () => {
       setUsers(res.data);
       setLoading(false);
     } catch (error) {
-      console.error('Failed to fetch users', error);
+      console.error ('Failed to fetch users', error);
     }
   };
 
@@ -29,8 +29,8 @@ const RoleManagement = () => {
     return (
         <div className="p-5">
       <h2 className="text-2xl font-semibold mb-4">👥 User Role Management</h2>
-      <div className="overflow-x-auto rounded-xl shadow">
-        <table className="table table-zebra">
+      <div className="overflow-x-auto rounded-xl shadow max-w-full">
+        <table  className="table table-zebra w-full text-sm md:text-base">
           <thead className="bg-base-200 text-base font-semibold">
             <tr>
               <th>#</th>
