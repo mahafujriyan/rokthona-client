@@ -12,7 +12,7 @@ const [loading, setLoading] = useState(false);
 
   try {
     const token = localStorage.getItem('access-token');
-    await axios.patch(
+    await axios.put(
       `${import.meta.env.VITE_API_URL}/users/role/${email}`,
       { role: newRole },
       {
