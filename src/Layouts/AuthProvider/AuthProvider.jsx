@@ -4,11 +4,13 @@ import { createUserWithEmailAndPassword,  GoogleAuthProvider,  onAuthStateChange
 
 import { AuthContext } from '../../Context/AuthContex';
 import auth from '../../firebase/firebase.config';
+import useAxios from '../../Utilities/Axios/UseAxios';
 
 
 const AuthProvider = ({children}) => {
     const [loading,setLoading]=useState(true)
     const [user,setUser]=useState(null)
+    const axiosSecure=useAxios()
 
     // create user
     
@@ -60,28 +62,57 @@ const AuthProvider = ({children}) => {
 
     }
 
-    useEffect(()=>{
-    const unsubscribe=onAuthStateChanged(auth,async currenUser=>{
-      setUser(currenUser)
-       setLoading(false);
-       if(currenUser){
-          const token=await currenUser.getIdToken()
-            localStorage.setItem('access-token',token)
-               console.log('user in the auth state change', currenUser);
+    // useEffect(()=>{
+    // const unsubscribe=onAuthStateChanged(auth,async currenUser=>{
+    //   setUser(currenUser)
+    //    setLoading(false);
+    //    if(currenUser){
+    //       const token=await currenUser.getIdToken()
+    //         localStorage.setItem('access-token',token)
+    //            console.log('user in the auth state change', currenUser);
 
-       }
-       else{
-        localStorage.removeItem('access-token')
-       }
+    //    }
+    //    else{
+    //     localStorage.removeItem('access-token')
+    //    }
            
 
-            console.log('user in the auth state change', currenUser)
-        })
-    return ()=>{
-      unsubscribe()
+    //         console.log('user in the auth state change', currenUser)
+    //     })
+    // return ()=>{
+    //   unsubscribe()
+    // }
+    // },[])
+    useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, async (currenUser) => {
+    if (currenUser) {
+      const token = await currenUser.getIdToken();
+      localStorage.setItem('access-token', token);
+
+      try {
+        // 🔥 Fetch user from your backend using email
+        const res = await axiosSecure.get(`/users/${currenUser.email}`);
+        const dbUser = res.data;
+        setUser({ ...currenUser, role: dbUser.role }); // 👈 Combine Firebase + DB user
+
+        console.log('Logged-in user with role:', dbUser);
+      } catch (err) {
+        console.error('Error fetching user role:', err);
+        setUser(currenUser); // fallback to Firebase user
+      }
+    } else {
+      setUser(null);
+      localStorage.removeItem('access-token');
     }
-    },[])
-    
+
+    setLoading(false);
+  });
+
+  return () => {
+    unsubscribe();
+  };
+}, []);
+
 
     const authInfo={
         loading,

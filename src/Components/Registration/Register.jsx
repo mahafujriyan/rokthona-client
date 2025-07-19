@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router';
 import { updateProfile } from 'firebase/auth';
 import useAxios from '../../Utilities/Axios/UseAxios';
+import SocialLogIn from './SocialLogIn';
 
 const Register = () => {
   const [districts, setDistricts] = useState([]);
@@ -248,6 +249,7 @@ const handleSubmit = async (e) => {
         <button type="submit" className="btn btn-primary w-full">Register</button>
       </form>
         <p>Do you already have an account? Please <Link  to='/logIn'><span className='text-red-400'>LogIn</span></Link> </p>
+        <SocialLogIn></SocialLogIn>
     </div>
   );
 };

@@ -12,6 +12,9 @@ import AboutUs from '../pages/About/AboutUs';
 import ContactUs from '../pages/Home/Contactus/ContactUs';
 import DashboardLayout from '../Layouts/DashboardLayout/DashboardLayout';
 import Profile from '../pages/Dashboard/Profile';
+import RoleManagement from '../pages/Role/RoleManagement';
+import AdminRoute from './AdmminRoute';
+import Unauthorized from '../Utilities/Unauthorized';
 
 const router = createBrowserRouter([
   {
@@ -51,9 +54,23 @@ const router = createBrowserRouter([
       {
         path:"profile",
         element:<Profile></Profile>
-      }
+      },
+      {
+      path: "role-management",
+      element: (
+        <AdminRoute>
+          <RoleManagement />
+        </AdminRoute>
+      ),
+    }
+
     ]
   }
+  ,
+   {
+    path: "/unauthorized",
+    element: <Unauthorized />, 
+  },
 ]);
 
 

@@ -5,6 +5,7 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import auth from '../../firebase/firebase.config';
 import { Link, useNavigate } from 'react-router';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import SocialLogIn from './SocialLogIn';
 
 const LogIn = () => {
      const [formData, setFormData] = useState({ email: '', password: '' });
@@ -109,6 +110,7 @@ const LogIn = () => {
           <span className="text-red-400 hover:underline">Register</span>
         </Link>
       </p>
+      <SocialLogIn></SocialLogIn>
     </div>
     );
 };

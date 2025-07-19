@@ -1,9 +1,9 @@
-const plugin = require('daisyui');
+import daisyui from 'daisyui';
 
-module.exports = {
+export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,jsx,ts,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -11,14 +11,18 @@ module.exports = {
         primary: '#dc2626',
         secondary: '#fef2f2',
         accent: '#991b1b',
-        textMain: '#1f2937',
+        neutral: '#1f2937',
+        textMain: '#111827',
+        gradientStart: '#f87171',
+        gradientMid: '#b91c1c',
+        gradientEnd: '#450a0a',
       },
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
       },
     },
   },
-  plugins: [plugin],
+  plugins: [daisyui],
   daisyui: {
     themes: [
       {
