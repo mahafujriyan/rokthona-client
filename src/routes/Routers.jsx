@@ -169,19 +169,12 @@ const router = createBrowserRouter([
         </AdminRoute>
       ),
     },
-    {
-      path:"content-management",
-      element:<ContentMangment/>
-    },
-    {
-      path:"content-management-addBlog",
-      element:<AddBlog></AddBlog>
-    },
-   {
-    path:'edit-blog/:id',
-    element:<BlogDetail></BlogDetail>
-   }
-
+  
+      // ✅ Blog/Content Management
+      { path: 'content-management', element: <ContentMangment /> },
+      { path: 'content-management-addBlog', element: <AddBlog /> },
+      { path: 'edit-blog/:id', element: <BlogDetail /> },
+    
    
 
 
