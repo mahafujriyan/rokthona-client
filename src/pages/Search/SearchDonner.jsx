@@ -2,51 +2,78 @@ import React, { useEffect, useState } from 'react';
 import useAxios from '../../Utilities/Axios/UseAxios';
 
 const SearchDonner = () => {
-    const axios = useAxios();
+  const axios = useAxios();
 
-  const [bloodGroup, setBloodGroup] = useState("");
+  const [bloodGroup, setBloodGroup] = useState('');
   const [districts, setDistricts] = useState([]);
-  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState('');
   const [upazilas, setUpazilas] = useState([]);
-  const [selectedUpazila, setSelectedUpazila] = useState("");
+  const [selectedUpazila, setSelectedUpazila] = useState('');
   const [donors, setDonors] = useState([]);
   const [searchClicked, setSearchClicked] = useState(false);
 
-  // Load districts
+  // ✅ Load districts once
   useEffect(() => {
-    axios.get("/api/districts").then((res) => setDistricts(res.data));
-  }, [axios]);
+    const fetchDistricts = async () => {
+      try {
+        const res = await axios.get('/api/districts');
+        setDistricts(res.data);
+      } catch (err) {
+        console.error('Error fetching districts', err);
+      }
+    };
+    fetchDistricts();
+  }, []); // ✅ axios not in deps (safe if stable instance)
 
-  // Load upazilas on district change
+  // ✅ Load upazilas on district change
   useEffect(() => {
-    if (selectedDistrict) {
-      axios.get(`/api/upazilas/${selectedDistrict}`).then((res) => setUpazilas(res.data));
-    } else {
+    if (!selectedDistrict) {
       setUpazilas([]);
+      return;
     }
-  }, [selectedDistrict, axios]);
 
+    const fetchUpazilas = async () => {
+      try {
+        const res = await axios.get(`/api/upazilas/${selectedDistrict}`);
+        setUpazilas(res.data);
+      } catch (err) {
+        console.error('Error fetching upazilas', err);
+      }
+    };
+
+    fetchUpazilas();
+  }, [selectedDistrict]);
+
+  // ✅ Search donors
   const handleSearch = async (e) => {
     e.preventDefault();
     setSearchClicked(true);
 
-    const query = new URLSearchParams({
-      bloodGroup,
-      district: selectedDistrict,
-      upazila: selectedUpazila,
-    }).toString();
+    try {
+      const query = new URLSearchParams({
+        bloodGroup,
+        district: selectedDistrict,
+        upazila: selectedUpazila,
+      }).toString();
 
-    const res = await axios.get(`/donors?${query}`);
-    setDonors(res.data);
+      const res = await axios.get(`/donors?${query}`);
+      setDonors(res.data);
+    } catch (err) {
+      console.error('Error searching donors', err);
+      setDonors([]);
+    }
   };
-    return (
-      <div className="max-w-6xl mx-auto px-4 py-8">
-      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center text-red-600">🔍 Search for Blood Donors</h2>
+
+  return (
+    <div className="max-w-6xl mx-auto px-4 py-8">
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center text-red-600">
+        🔍 Search for Blood Donors
+      </h2>
 
       {/* Search Form */}
       <form
         onSubmit={handleSearch}
-        className="flex flex-col gap-4 bg-white p-4 rounded-lg shadow-md max-w-md mx-auto"
+        className="flex flex-col gap-4 bg-white p-6 rounded-lg shadow max-w-md mx-auto"
       >
         <select
           className="border border-gray-300 p-2 rounded-md"
@@ -55,7 +82,7 @@ const SearchDonner = () => {
           required
         >
           <option value="">Select Blood Group</option>
-          {["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"].map((bg) => (
+          {['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'].map((bg) => (
             <option key={bg} value={bg}>
               {bg}
             </option>
@@ -100,31 +127,38 @@ const SearchDonner = () => {
       </form>
 
       {/* Search Results */}
-      <div className="mt-8">
+      <div className="mt-10">
         {searchClicked && donors.length === 0 && (
           <p className="text-center text-gray-500">No donors found for the selected filters.</p>
         )}
 
         {donors.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
             {donors.map((donor) => (
               <div
                 key={donor._id}
-                className="bg-white border border-gray-200 rounded-lg shadow-sm p-4"
+                className="bg-white border border-gray-200 rounded-lg shadow p-4"
               >
-                <h3 className="text-xl font-semibold text-red-600">{donor.name}</h3>
-                <p className="text-gray-700"><strong>Blood Group:</strong> {donor.bloodGroup}</p>
-                <p className="text-gray-700"><strong>District:</strong> {donor.districtName}</p>
-                <p className="text-gray-700"><strong>Upazila:</strong> {donor.upazila}</p>
-                <p className="text-gray-700"><strong>Phone:</strong> {donor.phone}</p>
+                <h3 className="text-xl font-bold text-red-600">{donor.name}</h3>
+                <p className="text-gray-700">
+                  <strong>Blood Group:</strong> {donor.bloodGroup}
+                </p>
+                <p className="text-gray-700">
+                  <strong>District:</strong> {donor.districtName}
+                </p>
+                <p className="text-gray-700">
+                  <strong>Upazila:</strong> {donor.upazila}
+                </p>
+                <p className="text-gray-700">
+                  <strong>Phone:</strong> {donor.phone}
+                </p>
               </div>
             ))}
           </div>
         )}
       </div>
     </div>
-
-    );
+  );
 };
 
 export default SearchDonner;

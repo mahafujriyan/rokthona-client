@@ -40,19 +40,21 @@ const AuthProvider = ({children}) => {
 
      }
     //  googleLogIn
-   const googleLogin = () => {
-        setLoading(true);
-        const provider = new GoogleAuthProvider();
-        return signInWithPopup(auth, provider)
-          .then(result => {
-            const logInGoogle = result.user;
-            setUser(logInGoogle); 
-            const token=logInGoogle.getIdToken()
-            localStorage.setItem('access-token',token)
-            return logInGoogle;  
-          })
-          .finally(() => setLoading(false));
-      };
+  const googleLogin = async () => {
+  setLoading(true);
+  const provider = new GoogleAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const logInGoogle = result.user;
+    const token = await logInGoogle.getIdToken(); // ✅ await here
+    localStorage.setItem('access-token', token);
+    setUser(logInGoogle);
+    return logInGoogle;
+  } finally {
+    setLoading(false);
+  }
+};
+
 
     // signOut
     const signOutUser=()=>{

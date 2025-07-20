@@ -1,10 +1,11 @@
-import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../../../Context/AuthContex';
+import useAxios from '../../../Utilities/Axios/UseAxios';
 
 const MyDonationRequest = () => {
-      const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const axiosSecure = useAxios();
   const [requests, setRequests] = useState([]);
   const [statusFilter, setStatusFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,27 +14,27 @@ const MyDonationRequest = () => {
 
   const fetchRequests = async () => {
     try {
-      const token = localStorage.getItem('access-token');
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/donation-requests/by-requester`, {
-        headers: { Authorization: `Bearer ${token}` },
+      const res = await axiosSecure.get('/donation-requestss/by-requester', {
         params: {
           email: user?.email,
           page: currentPage,
           status: statusFilter
         },
       });
-      setRequests(res.data.requests);
+
+      setRequests(res.data.requests || []);
       setTotalPages(res.data.totalPages || 1);
     } catch (err) {
-      console.error(err);
+      console.error('Failed to fetch requests', err);
     }
   };
 
   useEffect(() => {
     if (user?.email) fetchRequests();
   }, [user?.email, currentPage, statusFilter]);
-    return (
-         <div className="p-4 md:p-6">
+
+  return (
+    <div className="p-4 md:p-6">
       <h2 className="text-xl font-bold mb-4">🩸 My Donation Requests</h2>
 
       {/* Filter */}
@@ -70,7 +71,12 @@ const MyDonationRequest = () => {
                 <td>{req.bloodGroup}</td>
                 <td>{req.status}</td>
                 <td>
-                  <button onClick={() => navigate(`/dashboard/edit-request/${req._id}`)} className="btn btn-xs btn-info">Edit</button>
+                  <button
+                    onClick={() => navigate(`/dashboard/edit-request/${req._id}`)}
+                    className="btn btn-xs btn-info"
+                  >
+                    Edit
+                  </button>
                 </td>
               </tr>
             ))}
@@ -84,16 +90,20 @@ const MyDonationRequest = () => {
           disabled={currentPage <= 1}
           onClick={() => setCurrentPage(prev => prev - 1)}
           className="btn btn-sm"
-        >Previous</button>
+        >
+          Previous
+        </button>
         <span>Page {currentPage} of {totalPages}</span>
         <button
           disabled={currentPage >= totalPages}
           onClick={() => setCurrentPage(prev => prev + 1)}
           className="btn btn-sm"
-        >Next</button>
+        >
+          Next
+        </button>
       </div>
     </div>
-    );
+  );
 };
 
 export default MyDonationRequest;

@@ -153,9 +153,9 @@ const router = createBrowserRouter([
     },
     {
       path:"content-management",
-      element:<ContentMangment>
+      element:<ContentMangment/>
 
-      </ContentMangment>
+      
 
     },
     {
