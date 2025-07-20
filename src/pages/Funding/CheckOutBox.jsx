@@ -41,6 +41,7 @@ const CheckOutBox = () => {
           billing_details: {
             name,
             email,
+            
           },
         },
       });

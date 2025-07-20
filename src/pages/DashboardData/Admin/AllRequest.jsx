@@ -27,7 +27,7 @@ const AllRequest = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const res = await axiosSecure.get('/donation-requests/all', {
+        const res = await axiosSecure.get('/admin/all', {
           params: {
             status: status !== 'all' ? status : undefined,
             page,
@@ -67,7 +67,7 @@ const AllRequest = () => {
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axiosSecure.patch(`/donation-requests/${id}/status`, { status: newStatus });
+      await axiosSecure.patch(`/admin/all/${id}/status`, { status: newStatus });
       const updated = requests.map((r) =>
         r._id === id ? { ...r, status: newStatus } : r
       );

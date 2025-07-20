@@ -23,6 +23,8 @@ const SocialLogIn = () => {
           photoURL: user.photoURL,
           role: 'donor', 
         };
+        console.log('📤 Sending user info to DB:', userInfo);
+
 
         try {
           // Save user to backend
