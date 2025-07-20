@@ -152,7 +152,7 @@ const AllRequest = () => {
                     View
                   </Link>
 
-                  {/* Show Edit/Delete only for admin */}
+                
                   {userRole === 'admin' && (
                     <>
                       <Link

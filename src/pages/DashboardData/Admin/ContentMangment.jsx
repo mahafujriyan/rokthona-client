@@ -50,17 +50,6 @@ const ContentManagement = () => {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (userRole !== 'admin') return alert('Only admins can delete.');
-    if (!confirm('Are you sure?')) return;
-
-    try {
-      await axiosSecure.delete(`/blogs/${id}`);
-      fetchBlogs();
-    } catch (err) {
-      console.error('Delete failed:', err);
-    }
-  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
@@ -95,11 +84,9 @@ const ContentManagement = () => {
           {blogs.map((blog) => (
             <div key={blog._id} className="card bg-base-100 shadow-sm border">
               <figure>
-                <img
-                  src={blog.thumbnail}
-                  alt={blog.title}
-                  className="h-48 w-full object-cover rounded-t"
-                />
+               <img src={blog.image || blog.thumbnail} alt={blog.title}  className="h-48 w-full object-cover rounded-t"/>
+
+                 
               </figure>
               <div className="card-body flex flex-col">
                 <h3 className="card-title">{blog.title}</h3>
@@ -115,17 +102,17 @@ const ContentManagement = () => {
                   </span>
 
                   <div className="flex flex-wrap gap-2">
-                    {/* Edit button available to both admin and volunteer */}
-                    {(userRole === 'admin' || userRole === 'volunteer') && (
-                      <Link
-                        to={`/dashboard/edit-blog/${blog._id}`}
-                        className="btn btn-sm btn-secondary"
-                      >
-                        Edit
-                      </Link>
-                    )}
+                    
+                        {(userRole === 'admin' || blog?.authorEmail === localStorage.getItem('user-email')) && (
+              <Link
+                to={`/dashboard/edit-blog/${blog._id}`}
+                className="btn btn-sm btn-secondary"
+              >
+                Edit
+              </Link>
+                  )}
 
-                    {/* Admin-only buttons */}
+
                     {userRole === 'admin' && (
                       <>
                         <button

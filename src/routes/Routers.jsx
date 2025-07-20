@@ -23,7 +23,7 @@ import Admin from '../pages/DashboardData/Admin/Admin';
 import AllUsers from '../pages/DashboardData/Admin/AllUsers';
 import AllRequest from '../pages/DashboardData/Admin/AllRequest';
 import ContentMangment from '../pages/DashboardData/Admin/ContentMangment';
-import AddBlog from '../pages/DashboardData/Admin/AddBlog';
+
 import PrivateRoute from './PrivateRoute';
 import DonationPublic from '../pages/DonationRequestPublic/DonationPublic';
 import AdminOrVolenter from './AdminOrVolenter';
@@ -33,6 +33,9 @@ import VolunteerRoute from './VlounterRoute';
 import Volunteers from '../pages/DashboardData/Volenters/Volunteers';
 import ViewRequest from '../pages/DashboardData/Donner/ViewRequest';
 import SearchDonner from '../pages/Search/SearchDonner';
+import AddBlog from '../pages/Blog/AddBlog';
+import BlogDetail from '../pages/Blog/BlogDetails';
+import PublicBlogList from '../pages/Blog/PublicBlogList';
 
 const router = createBrowserRouter([
   {
@@ -72,6 +75,12 @@ const router = createBrowserRouter([
           element:<SearchDonner></SearchDonner>
 
         },
+        {
+          
+              path: '/blogs',
+              element: <PublicBlogList />
+            },
+                    
        
       
         {
@@ -163,15 +172,15 @@ const router = createBrowserRouter([
     {
       path:"content-management",
       element:<ContentMangment/>
-
-      
-
     },
     {
       path:"content-management-addBlog",
       element:<AddBlog></AddBlog>
     },
- 
+   {
+    path:'edit-blog/:id',
+    element:<BlogDetail></BlogDetail>
+   }
 
    
 

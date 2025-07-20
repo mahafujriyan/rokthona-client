@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import useAxios from '../../Utilities/Axios/UseAxios';
+import DonorCard from './DonnerCard';
 
 const SearchDonner = () => {
-  const axios = useAxios();
+  const axiosSecure = useAxios();
 
   const [bloodGroup, setBloodGroup] = useState('');
   const [districts, setDistricts] = useState([]);
@@ -11,21 +12,22 @@ const SearchDonner = () => {
   const [selectedUpazila, setSelectedUpazila] = useState('');
   const [donors, setDonors] = useState([]);
   const [searchClicked, setSearchClicked] = useState(false);
+  const [loading, setLoading] = useState(false);  // Add loading state
 
-  // ✅ Load districts once
+  // Load districts once
   useEffect(() => {
     const fetchDistricts = async () => {
       try {
-        const res = await axios.get('/api/districts');
+        const res = await axiosSecure.get('/api/districts');
         setDistricts(res.data);
       } catch (err) {
         console.error('Error fetching districts', err);
       }
     };
     fetchDistricts();
-  }, []); // ✅ axios not in deps (safe if stable instance)
+  }, []);
 
-  // ✅ Load upazilas on district change
+  // Load upazilas on district change
   useEffect(() => {
     if (!selectedDistrict) {
       setUpazilas([]);
@@ -34,7 +36,7 @@ const SearchDonner = () => {
 
     const fetchUpazilas = async () => {
       try {
-        const res = await axios.get(`/api/upazilas/${selectedDistrict}`);
+        const res = await axiosSecure.get(`/api/upazilas/${selectedDistrict}`);
         setUpazilas(res.data);
       } catch (err) {
         console.error('Error fetching upazilas', err);
@@ -44,10 +46,11 @@ const SearchDonner = () => {
     fetchUpazilas();
   }, [selectedDistrict]);
 
-  // ✅ Search donors
+  // Search donors
   const handleSearch = async (e) => {
     e.preventDefault();
     setSearchClicked(true);
+    setLoading(true);  
 
     try {
       const query = new URLSearchParams({
@@ -56,17 +59,19 @@ const SearchDonner = () => {
         upazila: selectedUpazila,
       }).toString();
 
-      const res = await axios.get(`/donors?${query}`);
+      const res = await axiosSecure.get(`/donors?${query}`);
       setDonors(res.data);
     } catch (err) {
       console.error('Error searching donors', err);
       setDonors([]);
+    } finally {
+      setLoading(false);  
     }
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center text-red-600">
+    <div className="max-w-6xl mx-auto px-4 py-10">
+      <h2 className="text-3xl font-bold text-center mb-8 text-red-600">
         🔍 Search for Blood Donors
       </h2>
 
@@ -126,33 +131,22 @@ const SearchDonner = () => {
         </button>
       </form>
 
-      {/* Search Results */}
+      {/* Results */}
       <div className="mt-10">
-        {searchClicked && donors.length === 0 && (
-          <p className="text-center text-gray-500">No donors found for the selected filters.</p>
+        {searchClicked && loading && (
+          <p className="text-center text-gray-500">Loading donors...</p>
+        )}
+
+        {searchClicked && !loading && donors.length === 0 && (
+          <p className="text-center text-gray-500">
+            No donors found for the selected filters.
+          </p>
         )}
 
         {donors.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {donors.map((donor) => (
-              <div
-                key={donor._id}
-                className="bg-white border border-gray-200 rounded-lg shadow p-4"
-              >
-                <h3 className="text-xl font-bold text-red-600">{donor.name}</h3>
-                <p className="text-gray-700">
-                  <strong>Blood Group:</strong> {donor.bloodGroup}
-                </p>
-                <p className="text-gray-700">
-                  <strong>District:</strong> {donor.districtName}
-                </p>
-                <p className="text-gray-700">
-                  <strong>Upazila:</strong> {donor.upazila}
-                </p>
-                <p className="text-gray-700">
-                  <strong>Phone:</strong> {donor.phone}
-                </p>
-              </div>
+              <DonorCard key={donor._id} donor={donor} />
             ))}
           </div>
         )}
