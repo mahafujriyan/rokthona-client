@@ -81,7 +81,7 @@ const Register = () => {
       }
     } catch (err) {
       console.error("Image upload failed", err);
-      alert("Image upload failed, try again.");
+      alert("Image upload faileds, try again.");
     }
   };
 
