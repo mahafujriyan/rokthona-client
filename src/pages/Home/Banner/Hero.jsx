@@ -30,7 +30,7 @@ const Hero = () => {
            <Link to='/singUp' className="btn mt-6 px-6 py-3 bg-red-300 text-white font-bold rounded-full shadow hover:bg-red-700 transition duration-200 hover:text-white">
             Join as a donor
           </Link>
-           <Link className="btn mt-6 px-6 py-3 bg-red-600 text-white font-bold rounded-full shadow hover:bg-red-700 transition duration-200">
+           <Link to='/search'  className="btn mt-6 px-6 py-3 bg-red-600 text-white font-bold rounded-full shadow hover:bg-red-700 transition duration-200">
             Search Donor
           </Link>
 

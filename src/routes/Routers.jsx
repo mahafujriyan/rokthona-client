@@ -19,7 +19,6 @@ import Donner from '../pages/DashboardData/Donner/Donner';
 import MyDonationRequest from '../pages/DashboardData/Donner/MyDonationRequest';
 import CreateDonation from '../pages/DashboardData/Donner/CreateDonation';
 import EditRequest from '../pages/DashboardData/Donner/EditRequest';
-import ViewRequest from '../pages/DashboardData/Donner/ViewRequest';
 import Admin from '../pages/DashboardData/Admin/Admin';
 import AllUsers from '../pages/DashboardData/Admin/AllUsers';
 import AllRequest from '../pages/DashboardData/Admin/AllRequest';
@@ -30,6 +29,10 @@ import DonationPublic from '../pages/DonationRequestPublic/DonationPublic';
 import AdminOrVolenter from './AdminOrVolenter';
 import PaymentHistory from '../pages/Funding/PaymentHistory';
 import CreatePayment from '../pages/Funding/CreatePayment';
+import VolunteerRoute from './VlounterRoute';
+import Volunteers from '../pages/DashboardData/Volenters/Volunteers';
+import ViewRequest from '../pages/DashboardData/Donner/ViewRequest';
+import SearchDonner from '../pages/Search/SearchDonner';
 
 const router = createBrowserRouter([
   {
@@ -65,13 +68,12 @@ const router = createBrowserRouter([
           path:'contact',
           element:<ContactUs></ContactUs>
         },
-        {
-          path:'/donation-request/:id',
-          element:<PrivateRoute>
-            <ViewRequest></ViewRequest>
-          </PrivateRoute>
+        {path:'search',
+          element:<SearchDonner></SearchDonner>
 
         },
+       
+      
         {
           path:'/create-payment',
           element:<CreatePayment></CreatePayment>
@@ -114,10 +116,11 @@ const router = createBrowserRouter([
       path: 'edit-request/:id',
       element: <EditRequest />
     },
-    {
-      path: 'requests/:id',
-      element: <ViewRequest/>
+    {path:'request/:id',
+      element:<ViewRequest></ViewRequest>
+
     },
+  
     {
       path:"admin-dashboard",
       element:(
@@ -125,6 +128,12 @@ const router = createBrowserRouter([
           <Admin></Admin>
         </AdminRoute>
       )
+
+    },
+    {path:'volunteers-dashboard',
+      element:<VolunteerRoute>
+        <Volunteers></Volunteers>
+      </VolunteerRoute>
 
     },
     {

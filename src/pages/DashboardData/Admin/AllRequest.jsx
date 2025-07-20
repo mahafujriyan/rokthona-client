@@ -146,7 +146,7 @@ const AllRequest = () => {
                 </td>
                 <td className="px-3 py-2 space-x-2 whitespace-nowrap">
                   <Link
-                    to={`/dashboard/view-donation-request/${req._id}`}
+                    to={`/dashboard/request/${req._id}`}
                     className="text-blue-500 hover:underline"
                   >
                     View

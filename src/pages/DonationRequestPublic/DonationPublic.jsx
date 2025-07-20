@@ -14,10 +14,10 @@ const DonationPublic = () => {
   useEffect(() => {
     const fetchPendingRequests = async () => {
       try {
-        const res = await axiosSecure.get('/donation-requests/all', {
+        const res = await axiosSecure.get('/donationValue/public', {
           params: { status: 'pending' },
         });
-        setRequests(res.data.requests);
+        setRequests(res.data);
       } catch (err) {
         console.error('Error fetching pending requests:', err);
       }
@@ -33,10 +33,11 @@ const DonationPublic = () => {
       navigate(`/dashboard/view-donation-request/${id}`);
     }
   };
+   console.log(requests)
 
   return (
-    <div className="px-4 py-8 max-w-7xl mx-auto">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-center text-red-600">
+     <div className="px-4 py-8 max-w-7xl mx-auto">
+      <h1 className="text-3xl sm:text-4xl font-bold mb-10 text-center text-red-700">
         🩸 Pending Blood Donation Requests
       </h1>
 
@@ -45,35 +46,46 @@ const DonationPublic = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {requests.map((req) => (
+           
             <div
               key={req._id}
-              className="card bg-white border shadow-md hover:shadow-lg transition duration-300"
+              className="bg-gradient-to-br from-red-50 via-white to-red-100 border border-red-300 shadow-lg hover:shadow-xl rounded-xl transition duration-300 flex flex-col justify-between"
             >
-              <div className="card-body">
-                <h2 className="card-title text-lg sm:text-xl">
-                  Recipient: {req.recipientName}
+              <div className="p-5 space-y-3 relative">
+                {/* Blood icon */}
+                <div className="absolute top-3 right-3 text-2xl text-red-500">🩸</div>
+
+                <h2 className="text-xl font-semibold text-red-700">
+                  {req.recipientName}
                 </h2>
-                <p className="text-sm sm:text-base text-gray-600">
-                  <strong>Location:</strong> {req.district}, {req.upazila}
-                </p>
-                <p className="text-sm sm:text-base text-gray-600">
-                  <strong>Blood Group:</strong> {req.bloodGroup}
-                </p>
-                <p className="text-sm sm:text-base text-gray-600">
-                  <strong>Date:</strong> {format(new Date(req.donationDate), 'PPP')}
-                </p>
-                <p className="text-sm sm:text-base text-gray-600">
-                  <strong>Time:</strong> {format(new Date(req.donationDate), 'p')}
+
+                <p className="text-gray-600 text-sm">
+                  📍 <strong>Location:</strong>  {req.recipientUpazila}
                 </p>
 
-                <div className="card-actions mt-4 justify-end">
-                  <button
-                    onClick={() => handleView(req._id)}
-                    className="btn btn-sm sm:btn-md bg-red-500 hover:bg-red-600 text-white w-full sm:w-auto"
-                  >
-                    View
-                  </button>
-                </div>
+                <p className="text-gray-600 text-sm">
+                  🩸 <strong>Blood Group:</strong>{' '}
+                  <span className="text-red-600 font-bold">{req.bloodGroup}</span>
+                </p>
+
+                <p className="text-gray-600 text-sm">
+                  📅 <strong>Date:</strong>{' '}
+                  {format(new Date(req.donationDate), 'PPP')}
+                </p>
+
+                <p className="text-gray-600 text-sm">
+                  ⏰ <strong>Time:</strong>{' '}
+                  {format(new Date(req.donationDate), 'p')}
+                </p>
+              </div>
+
+              <div className="p-5 pt-0">
+                <button
+                  onClick={() => handleView(req._id)}
+                  className="btn btn-sm sm:btn-md w-full bg-red-600 hover:bg-red-700 text-white rounded-full"
+                >
+                  View Details
+                </button>
               </div>
             </div>
           ))}

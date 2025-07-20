@@ -231,28 +231,19 @@ const DashboardLayout = () => {
         )}
 
         {/* Volunteer Links */}
-        {(user?.role === 'volunteer' || user?.role === 'admin') && (
-          <>
-            <Link
-              to="/dashboard/all-donation-request"
-              className="flex items-center gap-2 hover:text-yellow-300"
-            >
-              <FaDonate /> All Donation Requests
-            </Link>
-            <Link
-              to="/dashboard/content-management"
-              className="flex items-center gap-2 hover:text-yellow-300"
-            >
-              <FaPenFancy /> Content Management
-            </Link>
-            <Link
-              to="/dashboard/volunteer-tasks"
-              className="flex items-center gap-2 hover:text-yellow-300"
-            >
-              <FaHandsHelping /> Volunteer Tasks
-            </Link>
-          </>
-        )}
+        {user?.role === 'volunteer' && (
+  <>
+    <Link to="/dashboard/volunteers-dashboard" className="flex items-center gap-2 hover:text-yellow-300">
+      <FaHandsHelping /> Volunteer Dashboard
+    </Link>
+    <Link to="/dashboard/all-donation-request" className="flex items-center gap-2 hover:text-yellow-300">
+      <FaDonate /> Donation Requests
+    </Link>
+    <Link to="/dashboard/content-management" className="flex items-center gap-2 hover:text-yellow-300">
+      <FaPenFancy /> Blog Content
+    </Link>
+  </>
+)}
 
         {/* Admin-only Links */}
         {user?.role === 'admin' && (
@@ -275,6 +266,12 @@ const DashboardLayout = () => {
             >
               <FaUsers /> All Users
             </Link>
+             <Link to="/dashboard/all-donation-request" className="flex items-center gap-2 hover:text-yellow-300">
+      <FaDonate /> Donation Requests
+    </Link>
+    <Link to="/dashboard/content-management" className="flex items-center gap-2 hover:text-yellow-300">
+      <FaPenFancy /> Blog Content
+    </Link>
           </>
         )}
 

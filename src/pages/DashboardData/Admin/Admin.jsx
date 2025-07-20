@@ -24,11 +24,11 @@ const Admin = () => {
         </div>
         <div className="bg-white shadow-lg rounded-2xl p-6 text-center">
           <FaHandHoldingUsd className="text-4xl text-green-500 mx-auto" />
-          <h3 className="text-2xl font-bold mt-2">${stats.totalFunding || 0}</h3>
+          <h3 className="text-2xl font-bold mt-2">{stats.totalFunding?.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</h3>
           <p className="text-gray-600">Total Funding</p>
         </div>
         <div className="bg-white shadow-lg rounded-2xl p-6 text-center">
-          <FaTint class Name="text-4xl text-red-500 mx-auto" />
+          <FaTint className="text-4xl text-red-500 mx-auto" />
           <h3 className="text-2xl font-bold mt-2">{stats.totalRequests || 0}</h3>
           <p className="text-gray-600">Blood Requests</p>
         </div>
