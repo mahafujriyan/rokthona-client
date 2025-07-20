@@ -27,6 +27,9 @@ import ContentMangment from '../pages/DashboardData/Admin/ContentMangment';
 import AddBlog from '../pages/DashboardData/Admin/AddBlog';
 import PrivateRoute from './PrivateRoute';
 import DonationPublic from '../pages/DonationRequestPublic/DonationPublic';
+import AdminOrVolenter from './AdminOrVolenter';
+import PaymentHistory from '../pages/Funding/PaymentHistory';
+import CreatePayment from '../pages/Funding/CreatePayment';
 
 const router = createBrowserRouter([
   {
@@ -68,7 +71,19 @@ const router = createBrowserRouter([
             <ViewRequest></ViewRequest>
           </PrivateRoute>
 
-        }
+        },
+        {
+          path:'/create-payment',
+          element:<CreatePayment></CreatePayment>
+        },
+           {
+      path:'/dashboard/payment-history',
+      element:<PrivateRoute>
+        <AdminOrVolenter>
+          <PaymentHistory></PaymentHistory>
+        </AdminOrVolenter>
+      </PrivateRoute>
+    },
     ]
   },
   {
@@ -147,6 +162,8 @@ const router = createBrowserRouter([
       path:"content-management-addBlog",
       element:<AddBlog></AddBlog>
     },
+ 
+
    
 
 
