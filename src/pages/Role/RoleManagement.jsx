@@ -9,7 +9,7 @@ const RoleManagement = () => {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem('access-token');
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/users`, {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}users`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -14,10 +14,11 @@ const ContentManagement = () => {
   const [loading, setLoading] = useState(false);
   const [userRole, setUserRole] = useState('donor');
 
-  useEffect(() => {
-    const role = localStorage.getItem('user-role');
-    if (role) setUserRole(role);
-  }, []);
+ useEffect(() => {
+  const role = localStorage.getItem('user-role');
+  if (role) setUserRole(role);
+}, []);
+
 
   const fetchBlogs = async () => {
     setLoading(true);

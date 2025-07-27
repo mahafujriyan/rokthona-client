@@ -21,18 +21,35 @@ const EditRequest = () => {
   const [upazilas, setUpazilas] = useState([]);
 
   useEffect(() => {
-    // Load existing donation data
-    axiosSecure.get(`/donations/${id}`).then((res) => {
-      const data = res.data;
-      setFormData(data);
-      if (data.recipientDistrict) {
-        fetchUpazilas(data.recipientDistrict);
-      }
-    });
+  let isMounted = true;
 
-    // Load districts
-    axiosSecure.get("/api/districts").then((res) => setDistricts(res.data));
-  }, [id]);
+  const fetchData = async () => {
+    try {
+      const res = await axiosSecure.get(`/donations/${id}`);
+      if (isMounted) {
+        const data = res.data;
+        setFormData(data);
+        if (data.recipientDistrict) {
+          await fetchUpazilas(data.recipientDistrict);
+        }
+      }
+
+      const districtRes = await axiosSecure.get("/api/districts");
+      if (isMounted) {
+        setDistricts(districtRes.data);
+      }
+    } catch (error) {
+      console.error("❌ Error fetching data:", error);
+    }
+  };
+
+  fetchData();
+
+  return () => {
+    isMounted = false;
+  };
+}, [id]);
+
 
   const fetchUpazilas = (districtId) => {
     axiosSecure.get(`/api/upazilas/${districtId}`).then((res) =>
@@ -55,7 +72,7 @@ const EditRequest = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   await axiosSecure.patch(`/donation-data/${id}/status`, { status: "inprogress" });
+   await axiosSecure.patch(`/donationsData/${id}/status`, { status: "inprogress" });
 
     navigate("/dashboard"); 
   };

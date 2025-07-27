@@ -23,7 +23,7 @@ const ViewDonation = () => {
   useEffect(() => {
     const fetchRequest = async () => {
       try {
-        const res = await axiosSecure.get(`/donation-requests/${id}`);
+        const res = await axiosSecure.get(`/donations/${id}`);
         setRequest(res.data);
       } catch (err) {
         console.error(err);
@@ -34,7 +34,7 @@ const ViewDonation = () => {
 
   const handleConfirm = async () => {
     try {
-      const res = await axiosSecure.patch(`/donation-requests/${id}/confirm`);
+      const res = await axiosSecure.patch(`/donationRequest/${id}/confirm`);
       if (res.data.message) {
         Swal.fire('Success', res.data.message, 'success');
         setIsModalOpen(false);
@@ -52,10 +52,10 @@ const ViewDonation = () => {
 
  
     return (
-        <div className="max-w-3xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Donation Request Details</h1>
+        <div className="max-w-2xl mx-auto p-4">
+      <h1 className="text-2xl  font-bold mb-4">Donation Request Details</h1>
 
-      <div className="bg-white p-4 rounded-lg shadow-md space-y-2">
+      <div className="bg-gradient-to-br from-red-50 via-white to-red-100 border border-red-300 p-4 rounded-lg shadow-md space-y-2 object-cover max-w-[300px]  ">
         <p><strong>Recipient:</strong> {request.recipientName}</p>
         <p><strong>Location:</strong> {request.district}, {request.upazila}</p>
         <p><strong>Blood Group:</strong> {request.bloodGroup}</p>

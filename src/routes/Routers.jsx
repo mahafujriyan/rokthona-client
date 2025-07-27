@@ -36,6 +36,7 @@ import SearchDonner from '../pages/Search/SearchDonner';
 import AddBlog from '../pages/Blog/AddBlog';
 import BlogDetail from '../pages/Blog/BlogDetails';
 import PublicBlogList from '../pages/Blog/PublicBlogList';
+import ViewDonation from '../pages/DonationRequestPublic/ViewDonation';
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,12 @@ const router = createBrowserRouter([
         {
           path:'public-donation',
           element:<DonationPublic></DonationPublic>
+
+        },
+        { path:'publicView/:id',
+          element:<PrivateRoute>
+            <ViewDonation></ViewDonation>
+          </PrivateRoute>
 
         },
         {

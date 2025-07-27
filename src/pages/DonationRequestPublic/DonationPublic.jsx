@@ -30,7 +30,7 @@ const DonationPublic = () => {
     if (!user) {
       navigate('/login');
     } else {
-      navigate(`/dashboard/view-donation-request/${id}`);
+      navigate(`/publicView/${id}`);
     }
   };
    console.log(requests)
