@@ -115,75 +115,73 @@ const AllRequest = () => {
             </tr>
           </thead>
           <tbody>
-            {requests.map((req) => (
-              <tr key={req._id} className="border-t">
-                <td className="px-3 py-2">{req.recipientName}</td>
-                <td className="px-3 py-2">
-                  {req.district}, {req.upazila}
-                </td>
-                <td className="px-3 py-2">
-                  {format(new Date(req.donationDate), 'PPPp')}
-                </td>
-                <td className="px-3 py-2">{req.bloodGroup}</td>
-                <td className="px-3 py-2 capitalize">
-                  {userRole === 'volunteer' ? (
-                    <select
-                      className="select select-bordered select-sm w-full max-w-xs"
-                      value={req.status}
-                      onChange={(e) =>
-                        handleStatusChange(req._id, e.target.value)
-                      }
-                    >
-                      {updateStatusOptions.map((s) => (
-                        <option key={s} value={s}>
-                          {s}
-                        </option>
-                      ))}
-                    </select>
-                  ) : (
-                    req.status
-                  )}
-                </td>
-                <td className="px-3 py-2 space-x-2 whitespace-nowrap">
-                  <Link
-                    to={`/dashboard/request/${req._id}`}
-                    className="text-blue-500 hover:underline"
-                  >
-                    View
-                  </Link>
+  {requests.length > 0 ? (
+    requests.map((req) => (
+      <tr key={req._id} className="border-t">
+        <td className="px-3 py-2">{req.recipientName}</td>
+        <td className="px-3 py-2">
+          {req.district}, {req.upazila}
+        </td>
+        <td className="px-3 py-2">
+          {format(new Date(req.donationDate), 'PPPp')}
+        </td>
+        <td className="px-3 py-2">{req.bloodGroup}</td>
 
-                
-                  {userRole === 'admin' && (
-                    <>
-                      <Link
-                        to={`/dashboard/edit-donation-request/${req._id}`}
-                        className="text-yellow-500 hover:underline"
-                      >
-                        Edit
-                      </Link>
-                      <button
-                        onClick={() => handleDelete(req._id)}
-                        className="text-red-500 hover:underline"
-                      >
-                        Delete
-                      </button>
-                    </>
-                  )}
-                </td>
-              </tr>
-            ))}
+        <td className="px-3 py-2 capitalize">
+          {['admin', 'volunteer'].includes(user?.role) ? (
+            <select
+              className="select select-bordered select-sm w-full max-w-xs"
+              value={req.status}
+              onChange={(e) => handleStatusChange(req._id, e.target.value)}
+            >
+              {updateStatusOptions.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </select>
+          ) : (
+            req.status
+          )}
+        </td>
 
-            {requests.length === 0 && (
-              <tr>
-                <td
-                  colSpan="6"
-                  className="text-center py-4 text-gray-500"
-                >
-                  No requests found.
-                </td>
-              </tr>
-            )}
-          </tbody>
+        {/* Actions */}
+        <td className="px-3 py-2 space-x-2 whitespace-nowrap">
+          <Link
+            to={`/dashboard/request/${req._id}`}
+            className="text-blue-500 hover:underline"
+          >
+            View
+          </Link>
+
+          {userRole === 'admin' && (
+            <>
+              <Link
+                to={`/dashboard/edit-donation-request/${req._id}`}
+                className="text-yellow-500 hover:underline"
+              >
+                Edit
+              </Link>
+              <button
+                onClick={() => handleDelete(req._id)}
+                className="text-red-500 hover:underline"
+              >
+                Delete
+              </button>
+            </>
+          )}
+        </td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="6" className="text-center py-4 text-gray-500">
+        No requests found.
+      </td>
+    </tr>
+  )}
+</tbody>
+
         </table>
       </div>
 

@@ -21,7 +21,7 @@ const PublicBlogList = () => {
 
     fetchBlogs();
   }, []);
-
+console.log(blogs)
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
       <h2 className="text-2xl font-bold mb-4">📰 Latest Blogs</h2>
@@ -29,12 +29,12 @@ const PublicBlogList = () => {
         {blogs.map(blog => (
           <div key={blog._id} className="card bg-base-100 border shadow">
             <figure>
-              <img src={blog.thumbnail} alt={blog.title} className="w-full h-40 object-cover" />
+              <img src={blog.image} alt={blog.title} className="w-full h-40 object-cover" />
             </figure>
             <div className="card-body">
               <h3 className="card-title">{blog.title}</h3>
               <p className="text-sm line-clamp-3" dangerouslySetInnerHTML={{ __html: blog.content }}></p>
-              <Link to={`/blogs/${blog._id}`} className="btn btn-primary btn-sm mt-3">
+              <Link to={`/blog/${blog._id}`} className="btn btn-primary btn-sm mt-3">
                 Read More
               </Link>
             </div>

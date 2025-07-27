@@ -34,7 +34,8 @@ const PaymentHistory = () => {
     };
 
     fetchPayments();
-  }, [axiosSecure, page]);
+  }, [page]);
+  console.log(payments)
 
   return (
     <div className="p-4">

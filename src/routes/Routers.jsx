@@ -86,7 +86,12 @@ const router = createBrowserRouter([
           
               path: '/blogs',
               element: <PublicBlogList />
-            },
+       },
+       {
+        path:'/blog/:id',
+        element:<BlogDetail></BlogDetail>
+
+       },
                     
        
       
@@ -94,14 +99,7 @@ const router = createBrowserRouter([
           path:'/create-payment',
           element:<CreatePayment></CreatePayment>
         },
-           {
-      path:'/dashboard/payment-history',
-      element:<PrivateRoute>
-        <AdminOrVolenter>
-          <PaymentHistory></PaymentHistory>
-        </AdminOrVolenter>
-      </PrivateRoute>
-    },
+          
     ]
   },
   {
@@ -163,11 +161,18 @@ const router = createBrowserRouter([
     },
     {
       path:"all-donation-request",
-      element:<AdminRoute>
-        <AllRequest></AllRequest>
-      </AdminRoute>
+      element:
+        <AdminOrVolenter>
+          <AllRequest></AllRequest>
+        </AdminOrVolenter>
+      
 
     },
+    {
+      path:'payment-history',
+      element:<PaymentHistory></PaymentHistory>
+    },
+    
       {
       path: "role-management",
       element: (
@@ -176,6 +181,7 @@ const router = createBrowserRouter([
         </AdminRoute>
       ),
     },
+  
   
       // ✅ Blog/Content Management
       { path: 'content-management', element: <ContentMangment /> },

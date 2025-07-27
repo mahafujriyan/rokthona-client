@@ -160,6 +160,7 @@ import {
   FaHandsHelping,
   FaClipboardList,
   FaPenFancy,
+  FaCodeBranch,
 } from 'react-icons/fa';
 import { AuthContext } from '../../Context/AuthContex';
 import { Link, Outlet, useNavigate } from 'react-router';
@@ -271,6 +272,9 @@ const DashboardLayout = () => {
     </Link>
     <Link to="/dashboard/content-management" className="flex items-center gap-2 hover:text-yellow-300">
       <FaPenFancy /> Blog Content
+    </Link>
+    <Link to="/dashboard/payment-history" className="flex items-center gap-2 hover:text-yellow-300">
+      <FaCodeBranch /> Payment History
     </Link>
           </>
         )}

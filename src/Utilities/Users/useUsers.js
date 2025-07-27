@@ -24,9 +24,10 @@ const useUsers = (email) => {
     };
 
     fetchUser();
-  }, [email, axiosSecure]);
+  }, [email]);
 
-  return { userData, loadingUser };
+return { userInfo: userData, isLoading: loadingUser };
+
 };
 
 export default useUsers;

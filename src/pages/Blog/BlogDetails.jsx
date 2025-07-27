@@ -36,12 +36,12 @@ const BlogDetail = () => {
     <div className="max-w-4xl mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold mb-4">{blog.title}</h1>
       <img
-        src={blog.thumbnail}
+        src={blog.image}
         alt={blog.title}
         className="w-full h-64 object-cover rounded mb-6"
       />
       <div
-        className="prose max-w-full"
+        className="prose max-w-full p-2"
         dangerouslySetInnerHTML={{ __html: blog.content }}
       />
       <p className="mt-6 text-sm text-gray-500">Status: {blog.status}</p>
