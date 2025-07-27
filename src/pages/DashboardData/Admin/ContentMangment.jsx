@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import useAxios from '../../../Utilities/Axios/UseAxios';
 import { Link, useNavigate } from 'react-router';
+import { AuthContext } from '../../../Context/AuthContex';
 
 const ContentManagement = () => {
   const axiosSecure = useAxios();
@@ -13,7 +14,7 @@ const ContentManagement = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const [userRole, setUserRole] = useState('donor');
-
+  const { user, signOutUser } = useContext(AuthContext);
  useEffect(() => {
   const role = localStorage.getItem('user-role');
   if (role) setUserRole(role);
@@ -41,7 +42,7 @@ const ContentManagement = () => {
   }, [filterStatus, page]);
 
   const handlePublishToggle = async (blog) => {
-    if (userRole !== 'admin') return alert('Only admins can change status.');
+    if (user?.role !== 'admin') return alert('Only admins can change status.');
 
     try {
       const newStatus = blog.status === 'draft' ? 'published' : 'draft';
@@ -125,13 +126,14 @@ const ContentManagement = () => {
                   </span>
 
                   <div className="flex flex-wrap gap-2">
-                    {(userRole === 'admin' || blog.authorEmail === localStorage.getItem('user-email')) && (
+                    {(user?.role === 'admin' || blog.authorEmail === localStorage.getItem('user-email')) && (
                       <Link to={`/dashboard/edit-blog/${blog._id}`} className="btn btn-sm btn-secondary">
                         Edit
                       </Link>
                     )}
+                   
 
-                    {userRole === 'admin' && (
+                    {user?.role === 'admin' && (
                       <>
                         <button
                           onClick={() => handlePublishToggle(blog)}

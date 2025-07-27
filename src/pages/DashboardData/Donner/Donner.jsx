@@ -37,7 +37,7 @@ const Donner = () => {
     };
 
     if (user?.email) fetchRequests();
-  }, [axiosSecure, user?.email]);
+  }, [user?.email]);
 
   const handleStatusChange = async (id, status) => {
     try {

@@ -22,7 +22,7 @@ const ViewRequest = () => {
     };
 
     if (id) fetchRequest();
-  }, [id, axiosSecure]);
+  }, [id]);
 
   if (loading) return <Loader />;
 
