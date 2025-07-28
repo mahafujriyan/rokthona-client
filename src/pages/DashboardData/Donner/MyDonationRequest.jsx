@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../../../Context/AuthContex';
 import useAxios from '../../../Utilities/Axios/UseAxios';
+import Empty from '../../Empty/Empty';
+
 
 const MyDonationRequest = () => {
   const { user } = useContext(AuthContext);
@@ -18,7 +20,7 @@ const MyDonationRequest = () => {
         params: {
           email: user?.email,
           page: currentPage,
-          status: statusFilter
+          status: statusFilter,
         },
       });
 
@@ -35,7 +37,7 @@ const MyDonationRequest = () => {
 
   return (
     <div className="p-4 md:p-6">
-      <h2 className="text-xl font-bold mb-4">🩸 My Donation Requests</h2>
+      <h2 className="text-xl font-bold mb-4 text-red-600">🩸 My Donation Requests</h2>
 
       {/* Filter */}
       <div className="mb-4">
@@ -52,56 +54,69 @@ const MyDonationRequest = () => {
         </select>
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto shadow rounded">
-        <table className="table table-sm">
-          <thead>
-            <tr>
-              <th>#</th><th>Recipient</th><th>Location</th><th>Date</th><th>Time</th><th>Blood</th><th>Status</th><th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {requests?.map((req, i) => (
-              <tr key={req._id}>
-                <td>{i + 1}</td>
-                <td>{req.recipientName}</td>
-                <td>{req.recipientDistrict}, {req.recipientUpazila}</td>
-                <td>{req.donationDate}</td>
-                <td>{req.donationTime}</td>
-                <td>{req.bloodGroup}</td>
-                <td>{req.status}</td>
-                <td>
-                  <button
-                    onClick={() => navigate(`/dashboard/edit-request/${req._id}`)}
-                    className="btn btn-xs btn-info"
-                  >
-                    Edit
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {/* Table or Empty State */}
+      {requests.length > 0 ? (
+        <>
+          <div className="overflow-x-auto shadow rounded">
+            <table className="table table-sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Recipient</th>
+                  <th>Location</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Blood</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {requests.map((req, i) => (
+                  <tr key={req._id}>
+                    <td>{i + 1}</td>
+                    <td>{req.recipientName}</td>
+                    <td>{req.recipientDistrict}, {req.recipientUpazila}</td>
+                    <td>{req.donationDate}</td>
+                    <td>{req.donationTime}</td>
+                    <td>{req.bloodGroup}</td>
+                    <td>{req.status}</td>
+                    <td>
+                      <button
+                        onClick={() => navigate(`/dashboard/edit-request/${req._id}`)}
+                        className="btn btn-xs btn-info"
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-      {/* Pagination */}
-      <div className="mt-4 flex justify-center gap-2">
-        <button
-          disabled={currentPage <= 1}
-          onClick={() => setCurrentPage(prev => prev - 1)}
-          className="btn btn-sm"
-        >
-          Previous
-        </button>
-        <span>Page {currentPage} of {totalPages}</span>
-        <button
-          disabled={currentPage >= totalPages}
-          onClick={() => setCurrentPage(prev => prev + 1)}
-          className="btn btn-sm"
-        >
-          Next
-        </button>
-      </div>
+          {/* Pagination */}
+          <div className="mt-4 flex justify-center gap-2">
+            <button
+              disabled={currentPage <= 1}
+              onClick={() => setCurrentPage(prev => prev - 1)}
+              className="btn btn-sm"
+            >
+              Previous
+            </button>
+            <span>Page {currentPage} of {totalPages}</span>
+            <button
+              disabled={currentPage >= totalPages}
+              onClick={() => setCurrentPage(prev => prev + 1)}
+              className="btn btn-sm"
+            >
+              Next
+            </button>
+          </div>
+        </>
+      ) : (
+        <Empty message="You haven't added any donation requests yet." />
+      )}
     </div>
   );
 };

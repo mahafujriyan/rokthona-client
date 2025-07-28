@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import useAxios from '../../../Utilities/Axios/UseAxios';
 
+
 const Donner = () => {
    const { user } = useContext(AuthContext);
   const [requests, setRequests] = useState([]);
@@ -15,29 +16,30 @@ const Donner = () => {
   const axiosSecure = useAxios();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchRequests = async () => {
-      try {
-        const [res] = await Promise.all([
-          axiosSecure.get('/donationValue/public', {
-            params: { email: user?.email, type: 'requester' },
-          }),
-        ]);
+useEffect(() => {
+  const fetchRequests = async () => {
+    try {
+      const [res] = await Promise.all([
+        axiosSecure.get('/donationValue/public', {
+          params: { email: user?.email, type: 'requester' },
+        }),
+      ]);
 
-        const unique = Array.from(
-          new Map(res.data.map((item) => [item._id, item])).values()
-        );
+      const unique = Array.from(
+        new Map(res.data.map((item) => [item._id, item])).values()
+      );
 
-        setRequests(unique.slice(0, 3));
-      } catch (err) {
-        console.error('❌ Failed to fetch requests:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
+      setRequests(unique.slice(0, 3));
+    } catch (err) {
+      console.error('❌ Failed to fetch requests:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    if (user?.email) fetchRequests();
-  }, [user?.email]);
+  if (user?.email) fetchRequests(); 
+}, [user?.email]);
+
 
   const handleStatusChange = async (id, status) => {
     try {

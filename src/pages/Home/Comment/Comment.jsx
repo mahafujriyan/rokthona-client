@@ -1,7 +1,9 @@
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
-import { Link } from 'react-router';
 import Slider from 'react-slick';
+import { motion } from 'framer-motion';
+import TypeAni from '../../../Components/Animation/TypeAni';
+import { Link } from 'react-router';
 
 const testimonials = [
   {
@@ -31,7 +33,7 @@ const testimonials = [
 ];
 
 const Comment = () => {
- const settings = {
+  const settings = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -41,41 +43,57 @@ const Comment = () => {
     slidesToScroll: 1,
   };
 
-    
-    return (
-         <div className="grid md:grid-cols-2 my-5 gap-10 p-10 bg-red-50 rounded-lg">
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ scale: 1.02 }}
+      className="flex flex-col md:grid md:grid-cols-2 gap-10 p-5 md:p-10 bg-red-50 rounded-xl max-w-7xl mx-auto"
+    >
       {/* Left Side */}
-      <div>
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
+      <div className="flex flex-col justify-center">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-4">
           Donors' Opinions:
         </h2>
-        <p className="text-gray-600 mb-6">
-          Share your experience or opinion about the blood donation platform.
-        </p>
-        <Link to='/comments' className="btn p-4 rounded-2xl bg-red-600 text-white px-4 py-2  flex items-center gap-2 hover:bg-red-700">
+
+        <TypeAni
+          text="Share your opinion about the blood donation platform."
+          className="text-lg sm:text-xl md:text-2xl font-medium text-gray-600 mb-6"
+        />
+
+        <Link
+          to="/comments"
+          className="btn bg-red-600 text-white rounded-xl px-5 py-3 w-fit flex items-center gap-2 hover:bg-red-700 transition"
+        >
           Give Your Opinion <FaArrowRight />
         </Link>
       </div>
 
       {/* Right Side - Carousel */}
-      <div>
+      <div className="w-full">
         <Slider {...settings}>
           {testimonials.map((item, index) => (
-            <div key={index} className="bg-white p-10 rounded-lg shadow text-center">
+            <div
+              key={index}
+              className="bg-white p-6 sm:p-8 rounded-xl shadow-md text-center"
+            >
               <img
                 src={item.photo}
                 alt={item.name}
-                className="w-24 h-24 mx-auto rounded-full mb-4 object-cover"
+                className="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full mb-4 object-cover"
               />
-              <h3 className="text-2xl font-semibold">{item.name}, {item.bloodGroup}</h3>
-              <p className="text-md text-gray-500 mb-2">{item.district}</p>
-              <p className="text-gray-700 text-sm">{item.comment}</p>
+              <h3 className="text-lg sm:text-xl font-semibold">
+                {item.name}, {item.bloodGroup}
+              </h3>
+              <p className="text-sm text-gray-500">{item.district}</p>
+              <p className="text-sm text-gray-700 mt-2">{item.comment}</p>
             </div>
           ))}
         </Slider>
       </div>
-    </div>
-    );
+    </motion.div>
+  );
 };
 
 export default Comment;

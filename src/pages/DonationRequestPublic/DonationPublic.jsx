@@ -4,6 +4,7 @@ import useAxios from '../../Utilities/Axios/UseAxios';
 import { AuthContext } from '../../Context/AuthContex';
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router';
+import { motion } from 'framer-motion';
 
 const DonationPublic = () => {
   const [requests, setRequests] = useState([]);
@@ -32,9 +33,8 @@ const DonationPublic = () => {
     } else {
       navigate(`/publicView/${id}`);
     }
-  };
-   console.log(requests)
-
+  }
+  
   return (
      <div className="px-4 py-8 max-w-7xl mx-auto">
       <h1 className="text-3xl sm:text-4xl font-bold mb-10 text-center text-red-700">
@@ -45,9 +45,15 @@ const DonationPublic = () => {
         <p className="text-center text-gray-500 text-lg">No pending requests found.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {requests.map((req) => (
+          {requests.map((req,index) => (
            
-            <div
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, x: index % 2 === 0 ? -50 : 50 }}
+    animate={{ opacity: 1, scale: 1, x: 0 }}
+    transition={{ duration: 0.6, ease: 'easeOut', delay: index * 0.1 }}
+              
+           
+
               key={req._id}
               className="bg-gradient-to-br from-red-50 via-white to-red-100 border border-red-300 shadow-lg hover:shadow-xl rounded-xl transition duration-300 flex flex-col justify-between"
             >
@@ -87,12 +93,13 @@ const DonationPublic = () => {
                   View Details
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       )}
     </div>
   );
-};
+  }
+
 
 export default DonationPublic;

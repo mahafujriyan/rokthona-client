@@ -5,7 +5,7 @@ import { AuthContext } from '../../../Context/AuthContex';
 import useAxios from '../../../Utilities/Axios/UseAxios';
 import { format } from 'date-fns';
 import { Link } from 'react-router';
-
+import { motion } from 'framer-motion';
 const statusOptions = ['all', 'pending', 'inprogress', 'done', 'canceled'];
 const updateStatusOptions = ['pending', 'inprogress', 'done', 'canceled'];
 
@@ -102,7 +102,12 @@ const AllRequest = () => {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto w-full">
+      <motion.div
+    
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+       className="overflow-x-auto w-full">
         <table className="min-w-[800px] w-full border border-gray-300 text-sm">
           <thead className="bg-gray-100">
             <tr>
@@ -183,7 +188,7 @@ const AllRequest = () => {
 </tbody>
 
         </table>
-      </div>
+      </motion.div>
 
       {/* Pagination */}
       <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">

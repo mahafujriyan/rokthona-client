@@ -36,14 +36,14 @@ const Register = () => {
     axiosSecure.get('/api/districts')
       .then(res => setDistricts(res.data))
       .catch(err => console.error('Failed to load districts:', err));
-  }, [axiosSecure]);
+  }, []);
 
   // Load upazilas (backend)
   useEffect(() => {
     axiosSecure.get('/api/upazilas')
       .then(res => setUpazilas(res.data))
       .catch(err => console.error('Failed to load upazilas:', err));
-  }, [axiosSecure]);
+  }, []);
 
   // Filter upazilas when district changes
   useEffect(() => {
