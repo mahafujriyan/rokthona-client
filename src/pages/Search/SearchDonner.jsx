@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useAxios from '../../Utilities/Axios/UseAxios';
 import DonorCard from './DonnerCard';
+import Loader from '../../Utilities/Loader';
 
 const SearchDonner = () => {
   const axiosSecure = useAxios();
@@ -12,8 +13,7 @@ const SearchDonner = () => {
   const [selectedUpazila, setSelectedUpazila] = useState('');
   const [donors, setDonors] = useState([]);
   const [searchClicked, setSearchClicked] = useState(false);
-  const [loading, setLoading] = useState(false);  // Add loading state
-
+  const [loading, setLoading] = useState(false);  
   // Load districts once
   useEffect(() => {
     const fetchDistricts = async () => {
@@ -56,7 +56,7 @@ const SearchDonner = () => {
       const query = new URLSearchParams({
         bloodGroup,
         district: selectedDistrict,
-        upazila: selectedUpazila,
+        upazila : selectedUpazila,
       }).toString();
 
       const res = await axiosSecure.get(`/donors?${query}`);
@@ -134,10 +134,10 @@ const SearchDonner = () => {
       {/* Results */}
       <div className="mt-10">
         {searchClicked && loading && (
-          <p className="text-center text-gray-500">Loading donors...</p>
+          <Loader></Loader>
         )}
 
-        {searchClicked && !loading && donors.length === 0 && (
+        {searchClicked && !loading && donors.length == 0 && (
           <p className="text-center text-gray-500">
             No donors found for the selected filters.
           </p>
