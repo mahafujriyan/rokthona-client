@@ -5,8 +5,8 @@ const PartnerCard = ({ name, district, upazila, phone }) => {
     return (
          <div className="w-72 p-6 rounded-2xl shadow-md bg-red-50 border border-red-200 flex flex-col items-center text-center hover:shadow-xl transition">
      
-      <div className="bg-red-500 p-4 rounded-full mb-4">
-        <FaTint className="text-red-500 animate-pulse" />
+      <div className=" p-4 rounded mb-4">
+        <FaTint className="text-red-500 animate-bounce w-6 h-auto" />
   
       </div>
 

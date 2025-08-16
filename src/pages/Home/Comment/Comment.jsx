@@ -49,7 +49,7 @@ const Comment = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       whileHover={{ scale: 1.02 }}
-      className="flex flex-col md:grid md:grid-cols-2 gap-10 p-5 md:p-10 bg-red-50 rounded-xl max-w-7xl mx-auto"
+      className="flex flex-col md:grid md:grid-cols-2 gap-10 p-5 md:p-10 bg-red-50"
     >
       {/* Left Side */}
       <div className="flex flex-col justify-center">

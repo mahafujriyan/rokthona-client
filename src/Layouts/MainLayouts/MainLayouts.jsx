@@ -8,7 +8,7 @@ const MainLayouts = () => {
         <div className="flex flex-col min-h-screen">
       <Navbar />
 
-      <main className="flex-grow container mx-auto py-6">
+      <main className=" flex-grow container mx-auto py-6 ">
         <Outlet />
       </main>
 

@@ -23,7 +23,7 @@ const Navbar = () => {
       <li><NavLink to="/drequest" >Donation Requests</NavLink></li>
       
       <li><NavLink to="/blogs">Blog</NavLink></li>
-      <li><NavLink to="/create-payment">Funding</NavLink></li>
+      
       
     </>
   );

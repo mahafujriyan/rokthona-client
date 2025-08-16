@@ -29,9 +29,10 @@ const ContactUs = () => {
   };
     return (
 
-     <div className='my-4'>
+     <div className='bg-red-50 rounded-2xl'>
+      <div className='my-4  '>
         <h1 className='text-5xl text-center text-red-500'>Contact Us </h1>
-            <div className="grid md:grid-cols-2 gap-8 p-8 bg-white rounded-lg shadow-lg">
+            <div className="grid md:grid-cols-2 gap-8 p-8  rounded-lg shadow-lg">
       
       {/* Left side - Info */}
       <div>
@@ -114,6 +115,7 @@ const ContactUs = () => {
         </button>
       </form>
     </div>
+     </div>
      </div>
     );
 };

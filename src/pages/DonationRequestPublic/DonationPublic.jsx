@@ -36,7 +36,7 @@ const DonationPublic = () => {
   }
   
   return (
-     <div className="px-4 py-8 max-w-7xl mx-auto">
+     <div className="px-4 py-8 ">
       <h1 className="text-3xl sm:text-4xl font-bold mb-10 text-center text-red-700">
         🩸 Pending Blood Donation Requests
       </h1>
