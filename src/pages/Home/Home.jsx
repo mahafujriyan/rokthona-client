@@ -4,6 +4,7 @@ import ContactUs from './Contactus/ContactUs';
 import Comment from './Comment/Comment';
 import SearchDonner from '../Search/SearchDonner';
 import DonationPublic from '../DonationRequestPublic/DonationPublic';
+import Partners from '../../Partners/Partners';
 
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
             <SearchDonner></SearchDonner>
             <DonationPublic></DonationPublic>
             <Comment></Comment>
+            <Partners limit={true}></Partners>
             <ContactUs></ContactUs>
         
         </div>

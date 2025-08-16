@@ -37,6 +37,8 @@ import AddBlog from '../pages/Blog/AddBlog';
 import BlogDetail from '../pages/Blog/BlogDetails';
 import PublicBlogList from '../pages/Blog/PublicBlogList';
 import ViewDonation from '../pages/DonationRequestPublic/ViewDonation';
+import Partners from '../Partners/Partners';
+import DonationRequest from '../pages/DonationRequestPublic/DonationRequest';
 
 const router = createBrowserRouter([
   {
@@ -97,8 +99,20 @@ const router = createBrowserRouter([
       
         {
           path:'/create-payment',
-          element:<CreatePayment></CreatePayment>
+          element:<PrivateRoute>
+            <CreatePayment></CreatePayment>
+          </PrivateRoute>
         },
+        {
+          path:'/partners',
+          element:<Partners></Partners>
+        },
+        {
+          path:'/drequest',
+          element:<PrivateRoute>
+            <DonationRequest></DonationRequest>
+          </PrivateRoute>
+        }
           
     ]
   },
