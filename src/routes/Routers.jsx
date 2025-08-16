@@ -39,11 +39,13 @@ import PublicBlogList from '../pages/Blog/PublicBlogList';
 import ViewDonation from '../pages/DonationRequestPublic/ViewDonation';
 import Partners from '../Partners/Partners';
 import DonationRequest from '../pages/DonationRequestPublic/DonationRequest';
+import ErrorPage from '../Components/Shared/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayouts></MainLayouts>,
+    errorElement:<ErrorPage></ErrorPage>,
     children:[
         {
             index:true,
