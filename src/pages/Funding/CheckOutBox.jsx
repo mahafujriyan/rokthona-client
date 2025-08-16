@@ -72,7 +72,8 @@ const CheckOutBox = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <div >
+      <form onSubmit={handleSubmit} className="space-y-4">
       <input
         type="text"
         value={name}
@@ -109,6 +110,7 @@ const CheckOutBox = () => {
         {loading ? 'Processing...' : 'Pay Now'}
       </button>
     </form>
+    </div>
   );
 };
 

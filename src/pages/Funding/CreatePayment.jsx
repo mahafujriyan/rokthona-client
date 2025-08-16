@@ -8,7 +8,7 @@ const CreatePayment = () => {
     return (
        <div className="container mx-auto px-4 py-6 max-w-xl">
       <h2 className="text-2xl font-bold mb-6 text-center">Give Fund</h2>
-      <div className="bg-white shadow-md rounded-lg p-6">
+      <div className="max-w-md mx-auto bg-red-50 shadow-lg rounded-2xl p-6">
         <Elements stripe={stripePromise}>
           <CheckOutBox />
         </Elements>
