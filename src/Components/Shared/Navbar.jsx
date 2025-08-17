@@ -3,6 +3,7 @@ import { AuthContext } from '../../Context/AuthContex';
 import { Link, NavLink } from 'react-router';
 import { FaUserCircle } from 'react-icons/fa';
 import Logo from '../Logo';
+import ThemeToggle from './ThemeToggle';
 
 
 const Navbar = () => {
@@ -21,6 +22,8 @@ const Navbar = () => {
       </>
     )}
       <li><NavLink to="/drequest" >Donation Requests</NavLink></li>
+      <li><NavLink to="/all-users" >All User</NavLink></li>
+      
       
       <li><NavLink to="/blogs">Blog</NavLink></li>
       
@@ -29,7 +32,7 @@ const Navbar = () => {
   );
 
     return (
-       <div className=" navbar bg-[#f5bdbd] shadow-md sticky top-0 z-50 rounded-xl">
+       <div className=" navbar bg-[#f5bdbd]  shadow-md sticky top-0 z-50 rounded-xl">
       <div className="navbar-start">
       <Logo></Logo>
       </div>
@@ -43,6 +46,7 @@ const Navbar = () => {
 
       {/* User Info or Login */}
       <div className="navbar-end ">
+            
        {user ? (
   <div className="dropdown dropdown-end">
     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

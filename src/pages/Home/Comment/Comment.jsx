@@ -59,12 +59,12 @@ const Comment = () => {
 
         <TypeAni
           text="Share your opinion about the blood donation platform."
-          className="text-lg sm:text-xl md:text-2xl font-medium text-gray-600 mb-6"
+          className="text-lg sm:text-xl md:text-2xl font-medium text-[hsl(var(--t2))] mb-6"
         />
 
         <Link
           to="/comments"
-          className="btn bg-red-600 text-white rounded-xl px-5 py-3 w-fit flex items-center gap-2 hover:bg-red-700 transition"
+          className="btn bg-red-600  text-[color:var(--t2)]rounded-xl px-5 py-3 w-fit flex items-center gap-2 hover:bg-red-700 transition"
         >
           Give Your Opinion <FaArrowRight />
         </Link>
@@ -76,7 +76,7 @@ const Comment = () => {
           {testimonials.map((item, index) => (
             <div
               key={index}
-              className="bg-white p-6 sm:p-8 rounded-xl shadow-md text-center"
+              className="text-[hsl(var(--t2))] p-6 sm:p-8 rounded-xl shadow-md text-center"
             >
               <img
                 src={item.photo}

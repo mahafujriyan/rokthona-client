@@ -6,6 +6,7 @@ import SearchDonner from '../Search/SearchDonner';
 import DonationPublic from '../DonationRequestPublic/DonationPublic';
 import Partners from '../../Partners/Partners';
 import Newsletter from './Newsletter';
+import AllUsersCard from '../DashboardData/Admin/AllUsersCard';
 
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
             <Hero></Hero>
             <SearchDonner></SearchDonner>
             <DonationPublic></DonationPublic>
+            <AllUsersCard></AllUsersCard>
             <Comment></Comment>
             <Partners limit={true}></Partners>
             <ContactUs></ContactUs>

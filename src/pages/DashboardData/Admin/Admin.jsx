@@ -2,6 +2,9 @@ import React from 'react';
 import useAxios from '../../../Utilities/Axios/UseAxios';
 import { useQuery } from '@tanstack/react-query';
 import { FaHandHoldingUsd, FaTint, FaUserFriends } from 'react-icons/fa';
+import DonorPieChart from '../../PieChart/DonorPieChart';
+
+
 
 const Admin = () => {
      const axiosSecure = useAxios();
@@ -33,6 +36,9 @@ const Admin = () => {
           <p className="text-gray-600">Blood Requests</p>
         </div>
       </div>
+   <div className='my-7'>
+   <DonorPieChart></DonorPieChart>
+   </div>
     </div>
   );
 };

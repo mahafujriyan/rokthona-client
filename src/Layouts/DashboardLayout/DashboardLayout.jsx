@@ -262,7 +262,7 @@ const DashboardLayout = () => {
               <FaUsers /> Role Management
             </Link>
             <Link
-              to="/dashboard/all-users"
+              to="/dashboard/all-user"
               className="flex items-center gap-2 hover:text-yellow-300"
             >
               <FaUsers /> All Users

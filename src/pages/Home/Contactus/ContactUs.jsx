@@ -37,7 +37,7 @@ const ContactUs = () => {
       {/* Left side - Info */}
       <div>
         <p className="text-red-600 font-medium">Get in Touch</p>
-        <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4 text-[hsl(var(--t2))]">
           Have Questions About Blood Donation? Let's Chat!
         </h2>
         <p className="text-gray-700 mb-6">
@@ -49,7 +49,7 @@ const ContactUs = () => {
             <FaPhoneAlt className="text-red-600 text-xl" />
             <div>
               <p className="text-sm text-gray-600">Call Us</p>
-              <p className="font-semibold">+88 01889359904</p>
+              <p className="font-semibold text-[hsl(var(--t1))]">+88 01889359904</p>
             </div>
           </div>
 
@@ -57,14 +57,14 @@ const ContactUs = () => {
             <FaEnvelope className="text-red-600 text-xl" />
             <div>
               <p className="text-sm text-gray-600">Email Us</p>
-              <p className="font-semibold">rkthona@gmail.com</p>
+              <p className="font-semibold text-[hsl(var(--t1))]">rkthona@gmail.com</p>
             </div>
           </div>
         </div>
 
         <div className="mt-6">
           <p className="mb-2 font-medium">Find Us On:</p>
-          <div className="flex gap-4 text-white">
+          <div className="flex gap-4 text-[hsl(var(--t1))]">
             <a href="#" className="bg-red-600 p-2 rounded">
               <FaInstagram />
             </a>
@@ -83,10 +83,10 @@ const ContactUs = () => {
 
    
     {/* Right Side - Form */}
-      <form ref={form} onSubmit={sendEmail} className="space-y-4">
+      <form ref={form} onSubmit={sendEmail} className="space-y-4 text-[hsl(var(--t1))]">
         <div>
           <label className="block text-sm font-medium mb-1">Name</label>
-          <input type="text" name="user_name" placeholder="Name" className="w-full p-2 border rounded-md" required />
+          <input type="text" name="user_name" placeholder="Name" className="w-full p-2 border rounded-md text-[hsl(var(--t2))] " required />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

@@ -3,7 +3,7 @@ import React from 'react';
 const Newsletter = () => {
     return (
        <div className='bg-red-50 p-5 rounded-2xl'>
-                 <h3 className="text-xl font-semibold mb-4">Newsletter</h3>
+                 <h3 className="text-xl font-semibold mb-4 text-[hsl(var(--t1))]">Newsletter</h3>
                  <p className="text-black mb-4">
                    Subscribe to Our Newsletter to receive the newest updates and info.
                  </p>

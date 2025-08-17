@@ -40,6 +40,7 @@ import ViewDonation from '../pages/DonationRequestPublic/ViewDonation';
 import Partners from '../Partners/Partners';
 import DonationRequest from '../pages/DonationRequestPublic/DonationRequest';
 import ErrorPage from '../Components/Shared/ErrorPage';
+import AllUsersCard from '../pages/DashboardData/Admin/AllUsersCard';
 
 const router = createBrowserRouter([
   {
@@ -109,6 +110,15 @@ const router = createBrowserRouter([
           path:'/partners',
           element:<Partners></Partners>
         },
+         {
+      path:'all-users',
+      element:(
+     
+          <AllUsersCard></AllUsersCard>
+    
+      )
+
+    },
         {
           path:'/drequest',
           element:<PrivateRoute>
@@ -167,7 +177,7 @@ const router = createBrowserRouter([
 
     },
     {
-      path:'all-users',
+      path:'all-user',
       element:(
         <AdminRoute>
           <AllUsers></AllUsers>
