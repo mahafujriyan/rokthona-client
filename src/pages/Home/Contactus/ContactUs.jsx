@@ -1,7 +1,7 @@
 import emailjs from '@emailjs/browser';
 import React, { useRef } from 'react';
 import toast from 'react-hot-toast';
-import { FaPhoneAlt, FaEnvelope, FaInstagram, FaFacebookF, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { FaPhoneAlt, FaEnvelope, FaInstagram, FaFacebookF, FaTwitter,  FaLinkedin } from 'react-icons/fa';
 
 const ContactUs = () => {
 
@@ -65,17 +65,17 @@ const ContactUs = () => {
         <div className="mt-6">
           <p className="mb-2 font-medium">Find Us On:</p>
           <div className="flex gap-4 text-[hsl(var(--t1))]">
-            <a href="#" className="bg-red-600 p-2 rounded">
+            <a href="https://www.instagram.com/mahafujhr?igsh=Y2p1MmQ1b21tMjNm" className="bg-red-600 p-2 rounded">
               <FaInstagram />
             </a>
-            <a href="#" className="bg-red-600 p-2 rounded">
+            <a href="https://www.facebook.com/share/1JJHToMdZz/" className="bg-red-600 p-2 rounded">
               <FaFacebookF />
             </a>
-            <a href="#" className="bg-red-600 p-2 rounded">
+            <a href="https://x.com/Mhriyan87" className="bg-red-600 p-2 rounded">
               <FaTwitter />
             </a>
-            <a href="#" className="bg-red-600 p-2 rounded">
-              <FaYoutube />
+            <a href="https://www.linkedin.com/in/mahafujriyan87/" className="bg-red-600 p-2 rounded">
+              <FaLinkedin />
             </a>
           </div>
         </div>

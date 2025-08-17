@@ -6,6 +6,7 @@ import {
   FaPhoneAlt,
   FaEnvelope,
   FaMapMarkerAlt,
+  FaLinkedin,
 } from 'react-icons/fa';
 import Logo from '../Logo';
 import { Link } from 'react-router';
@@ -49,17 +50,17 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Newsletter */}
+       
         
       </div>
 
       {/* Social & Bottom */}
       <div className="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
         <div className="flex gap-4 text-white text-xl">
-          <a href="#"><FaInstagram /></a>
-          <a href="#"><FaFacebookF /></a>
-          <a href="#"><FaTwitter /></a>
-          <a href="#"><FaYoutube /></a>
+          <a href="https://www.instagram.com/mahafujhr?igsh=Y2p1MmQ1b21tMjNm"><FaInstagram /></a>
+          <a href="https://www.facebook.com/share/1JJHToMdZz/"><FaFacebookF /></a>
+          <a href="https://x.com/Mhriyan87"><FaTwitter /></a>
+          <a href="https://www.linkedin.com/in/mahafujriyan87/"><FaLinkedin /></a>
         </div>
         <p className="text-center text-black">
           Copyright © 2025 Donors, All rights reserved. Present by
